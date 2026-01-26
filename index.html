@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Sheila Sil | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ================= ROOT THEME ================= */
+:root{
+  --bg:#05070c;
+  --bg2:#0b1020;
+  --txt:#eef1ff;
+  --muted:#9aa3c7;
+  --accent:#8fa2ff;
+  --border:rgba(255,255,255,.1);
+  --glass:rgba(18,25,50,.55);
+  --glass-border:rgba(255,255,255,.12);
+}
+
+/* ================= GLOBAL ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;
+  background:radial-gradient(1200px 600px at 50% -20%,#10183a,transparent),var(--bg);
+  color:var(--txt);
+  overflow-x:hidden;
+}
+
+/* ================= CURSOR ================= */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+}
+.cursor-dot{width:6px;height:6px;background:white;border-radius:50%;}
+.cursor-ring{width:38px;height:38px;border:1px solid rgba(255,255,255,.35);border-radius:50%;}
+@media(max-width:900px){.cursor-dot,.cursor-ring{display:none}}
+
+/* ================= NAV ================= */
+nav{
+  position:fixed;top:0;width:100%;padding:20px 8%;
+  display:flex;justify-content:space-between;align-items:center;
+  backdrop-filter:blur(18px);background:rgba(5,7,12,.65);
+  border-bottom:1px solid var(--glass-border);
+  z-index:1000;
+  animation:fadeDown .8s ease forwards;
+}
+nav strong{font-weight:800}
+nav a{color:var(--muted);margin-left:26px;text-decoration:none;font-weight:600;}
+nav a:hover{color:white;}
+@keyframes fadeDown{from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:none;}}
+
+/* ================= HERO ================= */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;    /* stack text and metrics */
+  justify-content: center;   /* center vertically, can tweak */
+  align-items: flex-start;   /* start from left instead of middle */
+  padding-left: 10%;         /* give left margin */
+}
+
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 5rem;           /* really big hero text */
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 2rem;
+  margin-bottom: 50px;       /* space between subtitle and metrics */
+}
+
+.metrics {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(5,7,12,.55),rgba(5,7,12,.85)),
+    url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80') center/cover fixed;
+}
+
+/* ================= HERO LETTER-BY-LETTER ================= */
+.hero h1 span.letter{display:inline-block;opacity:0;}
+.hero p span.letter{display:inline-block;opacity:0;}
+
+/* ================= METRICS ================= */
+.metrics{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-top:80px;
+}
+.metric {
+  padding: 30px;               /* increase padding */
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  transition: .35s;
+}
+
+.metric h2 {
+  font-size: 3.5rem;           /* bigger number */
+  font-weight: 900;
+}
+
+.metric p {
+  font-size: 1.25rem;          /* bigger label text */
+  color: var(--muted);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0b0f25 0%, #1a2a55 50%, #05070c 100%);
+}
+
+  /* Hero title bigger and on one line */
+.hero-content h1 {
+  font-size: 4.5rem;       /* bigger hero text */
+  line-height: 1.2;        /* keep it tight */
+  white-space: nowrap;      /* stay on one line */
+}
+
+/* Hero subtitle bigger */
+.hero-content p {
+  font-size: 1.8rem;
+  margin-top: 20px;
+}
+
+/* Metrics aligned horizontally under hero text */
+.metrics {
+  display: flex;            /* switch from grid to flex */
+  gap: 40px;                /* spacing between metrics */
+  margin-top: 40px;
+  flex-wrap: wrap;          /* wrap on smaller screens */
+}
+
+/* Individual metrics bigger */
+.metric {
+  padding: 40px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  transition: .35s;
+}
+
+.metric h2 {
+  font-size: 4rem;          /* bigger number */
+  font-weight: 900;
+}
+
+.metric p {
+  font-size: 1.5rem;        /* bigger label */
+  color: var(--muted);
+}
+
+.metric:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.45);}
+.metric h2{font-size:2.4rem;font-weight:900}
+.metric p{color:var(--muted)}
+
+/* ================= SECTIONS ================= */
+section{padding:120px 10%}
+.section-title{font-size:2.6rem;font-weight:900;margin-bottom:50px;}
+
+/* ================= TIMELINE ================= */
+.timeline{border-left:2px solid var(--glass-border);padding-left:60px}
+.tl-item{margin-bottom:60px;position:relative;}
+.tl-item::before{
+  content:"";position:absolute;left:-36px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--accent)
+}
+.tl-item h3{font-size:1.15rem}
+.tl-item span{color:var(--muted);font-size:.9rem}
+.tl-item p{margin-top:10px;color:var(--muted)}
+
+/* ================= PROJECTS ================= */
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px
+}
+.project{
+  position:relative;overflow:hidden;
+  border-radius:24px;
+  background:var(--bg2);
+  border:1px solid var(--glass-border);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.project:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,.35);}
+.project img{width:100%;display:block;transition:.6s;}
+.project:hover img{transform:scale(1.08);}
+.project-overlay{
+  position:absolute;inset:0;
+  backdrop-filter:blur(22px);
+  background:rgba(8,12,30,.55);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  opacity:0;transition:.45s
+}
+.project:hover .project-overlay{opacity:1;}
+.project-overlay h3{margin-bottom:12px}
+.project-overlay a{padding:12px 26px;border-radius:999px;background:var(--accent);color:#000;font-weight:800;text-decoration:none}
+
+/* ================= MARQUEE ================= */
+.marquee{position:relative;overflow:hidden;border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:28px 0;}
+.marquee-track{display:inline-flex;white-space:nowrap;animation:marqueeFlow 30s linear infinite;will-change:transform;}
+.marquee-track span{padding-right:80px;color:var(--muted);font-weight:700;}
+@keyframes marqueeFlow{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:80px;pointer-events:none;z-index:2;}
+.marquee::before{left:0;background: linear-gradient(to right, var(--bg) 0%, transparent 100%);}
+.marquee::after{right:0;background: linear-gradient(to left, var(--bg) 0%, transparent 100%);}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+
+/* ================= CONTACT ================= */
+.contact{text-align:left;}
+.contact a{display:inline-block;margin-top:26px;padding:18px 40px;border-radius:999px;background:var(--accent);color:black;font-weight:900;text-decoration:none;}
+
+/* ================= REVEAL / ANIMATIONS ================= */
+@keyframes fadeRight{
+  0%{opacity:0; transform:translateX(-60px);}
+  60%{opacity:1; transform:translateX(10px);}
+  100%{transform:translateX(0);}
+}
+.reveal{opacity:0;transform:translateX(-40px);transition:.9s cubic-bezier(.22,.8,.22,1);}
+.reveal.show{opacity:1;transform:translateX(0);}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <strong>Sheila Sil</strong>
+  <div>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <!-- Hero content stays first -->
+  <div class="hero-content">
+    <h1 id="hero-title">Portfolio<br><span>Sheila Sil</span></h1>
+    <p id="hero-sub">Founder • Coding Mentor • STEM Leader</p>
+
+    <div class="metrics">
+      <div class="metric"><h2>25+</h2><p>Students taught</p></div>
+      <div class="metric"><h2>100%</h2><p>Motivation</p></div>
+      <div class="metric"><h2>10+</h2><p>Projects & curricula</p></div>
+    </div>
+  </div>
+
+  <!-- Background particles remain behind everything -->
+  <canvas id="heroParticles" style="position:absolute;inset:0;pointer-events:none;"></canvas>
+</section>
+
+
+<section id="about" class="reveal">
+  <h2 class="section-title">About</h2>
+  <p style="max-width:900px;color:var(--muted);line-height:1.7">
+    High school student and founder of a self-run coding course, focused on teaching Scratch, HTML, CSS, and JavaScript to young learners. Passionate about education, leadership, and building clean, scalable learning experiences.
+  </p>
+</section>
+
+<section id="experience" class="reveal">
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <h3>Founder & Mentor — Sheila’s Coding Course</h3>
+      <span>Jul 2024 – Present</span>
+      <p>Designed curriculum and taught 7–11 year olds coding fundamentals using Scratch and HTML.</p>
+    </div>
+    <div class="tl-item">
+      <h3>Code Coach — TheCoderSchool</h3>
+      <span>Dec 2025 – Present</span>
+      <p>Mentored students in creative coding, problem solving, and project-based learning.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>HTML • CSS • JavaScript • Java • Python • Scratch • Leadership • Communication •</span>
+    <span>HTML • CSS • JavaScript • Java • Python • Scratch • Leadership • Communication •</span>
+  </div>
+</div>
+
+<section id="projects" class="reveal">
+  <h2 class="section-title">Profiles</h2>
+  <div class="projects">
+ <div class="project">
+      <img src="https://u.cubeupload.com/Blakkie/Profile.png" />
+      <div class="project-overlay">
+        <h3>Scratch Profile</h3>
+        <a href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
+      </div>
+    </div>
+    <div class="project">
+      <img src="https://repository-images.githubusercontent.com/500872269/5f43de8e-a1ea-4847-a0fd-ae3ddeaec679" />
+      <div class="project-overlay">
+        <h3>Github Profile</h3>
+        <a href="https://github.com/Sheila-Sil" target="_blank">GitHub</a>
+      </div>
+    </div>
+<div class="project">
+      <img src="https://airisx.com/wp-content/uploads/2023/01/21251671_6392206-scaled.jpg" />
+      <div class="project-overlay">
+        <h3>Linkedin Profile</h3>
+        <a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank">Linkedin</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="projects" class="reveal">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects">
+ <div class="project">
+      <img src="https://u.cubeupload.com/Blakkie/Profile.png" />
+      <div class="project-overlay">
+        <h3>Oak Pine Community Hub</h3>
+        <a href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
+      </div>
+    </div>
+    <div class="project">
+      <img src="https://repository-images.githubusercontent.com/500872269/5f43de8e-a1ea-4847-a0fd-ae3ddeaec679" />
+      <div class="project-overlay">
+        <h3>Boat Ride</h3>
+        <a href="https://github.com/Sheila-Sil" target="_blank">GitHub</a>
+      </div>
+    </div>
+<div class="project">
+      <img src="https://airisx.com/wp-content/uploads/2023/01/21251671_6392206-scaled.jpg" />
+      <div class="project-overlay">
+        <h3>idk</h3>
+        <a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank">Linkedin</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="contact reveal">
+  <h2 class="section-title">Let’s Connect</h2>
+  <p>Katy, TX • (832) 757‑4501 • silsheila76@gmail.com</p>
+  <a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank">LinkedIn</a>
+</section>
+
+<footer>© 2026 Sheila Sil</footer>
+
+<script>
+/* ================= CURSOR ================= */
+const dot=document.querySelector('.cursor-dot');
+const ring=document.querySelector('.cursor-ring');
+let x=0,y=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  x=e.clientX;y=e.clientY;
+  dot.style.left=x+'px';dot.style.top=y+'px';
+});
+(function loop(){
+  rx+=(x-rx)*0.12; ry+=(y-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+
+/* ================= SCROLL REVEALS ================= */
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(e=>{
+  e.forEach(r=>r.isIntersecting && r.target.classList.add('show'));
+},{threshold:.15});
+reveals.forEach(r=>io.observe(r));
+
+/* ================= HERO PARTICLE BACKGROUND ================= */
+const canvas = document.getElementById("heroParticles");
+const ctx = canvas.getContext("2d");
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+// Create particles
+let parts = [];
+for (let i = 0; i < 120; i++) {
+  parts.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    size: Math.random() * 3 + 2,          // bigger
+    baseVx: (Math.random() - 0.5) * 0.8,  // base velocity
+    baseVy: (Math.random() - 0.5) * 0.8,
+    offsetX: 0,
+    offsetY: 0
+  });
+}
+
+// Parallax factor
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = (e.clientX - w/2)/w;
+  mouseY = (e.clientY - h/2)/h;
+});
+
+function draw() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "rgba(255,255,255,0.15)";
+  parts.forEach(p => {
+    // parallax offset
+    p.offsetX += (mouseX * 2 - p.offsetX) * 0.05;
+    p.offsetY += (mouseY * 2 - p.offsetY) * 0.05;
+
+    p.x += p.baseVx + p.offsetX;
+    p.y += p.baseVy + p.offsetY;
+
+    if (p.x < 0) p.x = w;
+    if (p.x > w) p.x = 0;
+    if (p.y < 0) p.y = h;
+    if (p.y > h) p.y = 0;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+
+
+</script>
+
+</body>
+</html>
