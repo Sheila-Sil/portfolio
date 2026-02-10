@@ -662,10 +662,12 @@ body::after {
 /* Floating motion */
 @keyframes floatImage {
   0%   { transform: translateY(0); }
-  50%  { transform: translateY(-14px); }
+  50%  { transform: translateY(-25px); }
   100% { transform: translateY(0); }
 }
-
+.about-image img {
+  animation: floatImage 3s ease-in-out infinite; /* faster: 3s instead of 6s */
+}
 /* Hover interaction */
 .about-image:hover img {
   transform: scale(1.07);
