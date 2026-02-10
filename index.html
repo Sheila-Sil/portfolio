@@ -1,319 +1,716 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
 
 <title>Sheila Sil | Portfolio</title>
 
+
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
+
+
 <style>
+
 /* ================= ROOT THEME ================= */
+
 :root{
+
   --bg:#05070c;
+
   --bg2:#0b1020;
+
   --txt:#eef1ff;
+
   --muted:#9aa3c7;
+
   --accent:#8fa2ff;
+
   --border:rgba(255,255,255,.1);
+
   --glass:rgba(18,25,50,.55);
+
   --glass-border:rgba(255,255,255,.12);
+
 }
+
+
 
 /* ================= GLOBAL ================= */
+
 *{margin:0;padding:0;box-sizing:border-box}
+
 html{scroll-behavior:smooth}
+
 body{
+
   font-family:Inter,sans-serif;
+
   background:radial-gradient(1200px 600px at 50% -20%,#10183a,transparent),var(--bg);
+
   color:var(--txt);
+
   overflow-x:hidden;
+
 }
+
+
 
 /* ================= CURSOR ================= */
+
 .cursor-dot,.cursor-ring{
+
   position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+
 }
+
 .cursor-dot{width:6px;height:6px;background:white;border-radius:50%;}
+
 .cursor-ring{width:38px;height:38px;border:1px solid rgba(255,255,255,.35);border-radius:50%;}
+
 @media(max-width:900px){.cursor-dot,.cursor-ring{display:none}}
 
+
+
 /* ================= NAV ================= */
+
 nav{
+
   position:fixed;top:0;width:100%;padding:20px 8%;
+
   display:flex;justify-content:space-between;align-items:center;
+
   backdrop-filter:blur(18px);background:rgba(5,7,12,.65);
+
   border-bottom:1px solid var(--glass-border);
+
   z-index:1000;
+
   animation:fadeDown .8s ease forwards;
+
 }
+
 nav strong{font-weight:800}
+
 nav a{color:var(--muted);margin-left:26px;text-decoration:none;font-weight:600;}
+
 nav a:hover{color:white;}
+
 @keyframes fadeDown{from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:none;}}
 
+
+
 /* ================= HERO ================= */
+
 .hero {
+
   height: 100vh;
+
   position: relative;
+
   overflow: hidden;
+
   display: flex;
+
   flex-direction: column;    /* stack text and metrics */
+
   justify-content: center;   /* center vertically, can tweak */
+
   align-items: flex-start;   /* start from left instead of middle */
+
   padding-left: 10%;         /* give left margin */
+
 }
+
+
 
 .hero-content {
+
   position: relative;
+
   max-width: 900px;
+
   z-index: 2;
+
 }
+
+
 
 .hero-content h1 {
+
   font-size: 5rem;           /* really big hero text */
+
   line-height: 1.1;
+
   margin-bottom: 20px;
+
 }
+
+
 
 .hero-content p {
+
   font-size: 2rem;
+
   margin-bottom: 50px;       /* space between subtitle and metrics */
+
 }
+
+
 
 .metrics {
+
   display: flex;
+
   gap: 40px;
+
   flex-wrap: wrap;
+
 }
 
+
+
 .hero::before{
+
   content:"";
+
   position:absolute;inset:0;
+
   background:linear-gradient(to bottom,rgba(5,7,12,.55),rgba(5,7,12,.85)),
+
     url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80') center/cover fixed;
+
 }
+
+
+
 
 
 /* ================= HERO GLOW HOVER ================= */
 
+
+
 /* Make hero text interactive */
+
 .hero-content h1,
+
 .hero-content p {
+
   transition: text-shadow 0.4s ease, transform 0.4s ease;
+
   cursor: default;
+
 }
+
+
 
 /* Glow effect on hover */
+
 .hero-content h1:hover,
+
 .hero-content p:hover {
+
   text-shadow:
+
     0 0 8px rgba(143,162,255,0.6),
+
     0 0 20px rgba(143,162,255,0.45),
+
     0 0 40px rgba(143,162,255,0.25);
+
   transform: translateY(-2px);
+
 }
+
+
 
 /* ================= HERO LETTER-BY-LETTER ================= */
+
 .hero h1 span.letter{display:inline-block;opacity:0;}
+
 .hero p span.letter{display:inline-block;opacity:0;}
 
+
+
 /* ================= METRICS ================= */
+
 .metrics{
+
   display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-top:80px;
+
 }
+
 .metric {
+
   padding: 30px;               /* increase padding */
+
   border-radius: 20px;
+
   backdrop-filter: blur(18px);
+
   background: var(--glass);
+
   border: 1px solid var(--glass-border);
+
   transition: .35s;
+
 }
+
 /* ================= HOVER BORDER GLOW ================= */
 
+
+
 .metric:hover,
+
 .project:hover {
+
   box-shadow:
+
     0 0 0 1px rgba(143,162,255,0.4),
+
     0 20px 60px rgba(0,0,0,0.45);
+
 }
+
+
 
 .metric h2 {
+
   font-size: 3.5rem;           /* bigger number */
+
   font-weight: 900;
+
 }
 
+
+
 .metric p {
+
   font-size: 1.25rem;          /* bigger label text */
+
   color: var(--muted);
+
 }
+
 .hero::before {
+
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   background: linear-gradient(135deg, #0b0f25 0%, #1a2a55 50%, #05070c 100%);
+
 }
+
+
 
   /* Hero title bigger and on one line */
+
 .hero-content h1 {
+
   font-size: 4.5rem;       /* bigger hero text */
+
   line-height: 1.2;        /* keep it tight */
+
   white-space: nowrap;      /* stay on one line */
+
 }
+
+
 
 /* Hero subtitle bigger */
+
 .hero-content p {
+
   font-size: 1.8rem;
+
   margin-top: 20px;
+
 }
+
+
 
 /* Metrics aligned horizontally under hero text */
+
 .metrics {
+
   display: flex;            /* switch from grid to flex */
+
   gap: 40px;                /* spacing between metrics */
+
   margin-top: 40px;
+
   flex-wrap: wrap;          /* wrap on smaller screens */
+
 }
+
+
 
 /* Individual metrics bigger */
+
 .metric {
+
   padding: 40px 50px;
+
   border-radius: 20px;
+
   backdrop-filter: blur(18px);
+
   background: var(--glass);
+
   border: 1px solid var(--glass-border);
+
   text-align: center;
+
   transition: .35s;
+
 }
+
+
 
 .metric h2 {
+
   font-size: 4rem;          /* bigger number */
+
   font-weight: 900;
+
 }
+
+
 
 .metric p {
+
   font-size: 1.5rem;        /* bigger label */
+
   color: var(--muted);
+
 }
+
+
 
 .metric:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.45);}
+
 .metric h2{font-size:2.4rem;font-weight:900}
+
 .metric p{color:var(--muted)}
+
 /* ================= GLASS HIGHLIGHT SWEEP ================= */
 
+
+
 .metric,
+
 .project {
+
   position: relative;
+
   overflow: hidden;
+
 }
+
+
 
 .metric::after,
+
 .project::after {
+
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   background: linear-gradient(
+
     120deg,
+
     transparent 30%,
+
     rgba(255,255,255,0.12),
+
     transparent 70%
+
   );
+
   opacity: 0;
+
   transform: translateX(-120%);
+
   transition: transform 0.6s ease, opacity 0.6s ease;
+
   pointer-events: none;
+
 }
+
+
 
 .metric:hover::after,
+
 .project:hover::after {
+
   opacity: 1;
+
   transform: translateX(120%);
+
 }
+
+
 
 /* ================= SECTIONS ================= */
+
 section{padding:120px 10%}
+
 .section-title{font-size:2.6rem;font-weight:900;margin-bottom:50px;}
 
+
+
 /* ================= TIMELINE ================= */
+
 .timeline{border-left:2px solid var(--glass-border);padding-left:60px}
+
 .tl-item{margin-bottom:60px;position:relative;}
+
 .tl-item::before{
+
   content:"";position:absolute;left:-36px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--accent)
+
 }
+
 .tl-item h3{font-size:1.15rem}
+
 .tl-item span{color:var(--muted);font-size:.9rem}
+
 .tl-item p{margin-top:10px;color:var(--muted)}
 
+
+
 /* ================= PROJECTS ================= */
+
 .projects{
+
   display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px
+
 }
+
 .project{
+
   position:relative;overflow:hidden;
+
   border-radius:24px;
+
   background:var(--bg2);
+
   border:1px solid var(--glass-border);
+
   transition: transform .35s ease, box-shadow .35s ease;
+
 }
+
 .project:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,.35);}
+
 .project img{width:100%;display:block;transition:.6s;}
+
 .project:hover img{transform:scale(1.08);}
+
 .project-overlay{
+
   position:absolute;inset:0;
+
   backdrop-filter:blur(22px);
+
   background:rgba(8,12,30,.55);
+
   display:flex;flex-direction:column;justify-content:center;align-items:center;
+
   opacity:0;transition:.45s
+
 }
+
 .project:hover .project-overlay{opacity:1;}
+
 .project-overlay h3{margin-bottom:12px}
+
 .project-overlay a{padding:12px 26px;border-radius:999px;background:var(--accent);color:#000;font-weight:800;text-decoration:none}
 
 
 
+
+
+
+
 /* ================= MARQUEE ================= */
+
 .marquee{position:relative;overflow:hidden;border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:28px 0;}
+
 .marquee-track{display:inline-flex;white-space:nowrap;animation:marqueeFlow 30s linear infinite;will-change:transform;}
+
 .marquee-track span{padding-right:80px;color:var(--muted);font-weight:700;}
+
 @keyframes marqueeFlow{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
 .marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:80px;pointer-events:none;z-index:2;}
+
 .marquee::before{left:0;background: linear-gradient(to right, var(--bg) 0%, transparent 100%);}
+
 .marquee::after{right:0;background: linear-gradient(to left, var(--bg) 0%, transparent 100%);}
+
 .marquee:hover .marquee-track{animation-play-state:paused;}
 
+
+
 /* ================= CONTACT ================= */
+
 .contact{text-align:left;}
+
 .contact a{display:inline-block;margin-top:26px;padding:18px 40px;border-radius:999px;background:var(--accent);color:black;font-weight:900;text-decoration:none;}
 
+
+
 /* ================= REVEAL / ANIMATIONS ================= */
+
 @keyframes fadeRight{
+
   0%{opacity:0; transform:translateX(-60px);}
+
   60%{opacity:1; transform:translateX(10px);}
+
   100%{transform:translateX(0);}
+
 }
+
 .reveal{opacity:0;transform:translateX(-40px);transition:.9s cubic-bezier(.22,.8,.22,1);}
+
 .reveal.show{opacity:1;transform:translateX(0);}
+
 /* ================= FILM GRAIN OVERLAY ================= */
 
+
+
 body::after {
+
   content: "";
+
   position: fixed;
+
   inset: 0;
+
   background: url("https://grainy-gradients.vercel.app/noise.png");
+
   opacity: 0.06;
+
   pointer-events: none;
+
   z-index: 9999;
+
 }
 
+/* ================= ABOUT LAYOUT ================= */
+
+.about-container {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 60px;
+
+  flex-wrap: wrap; /* Stacks on mobile */
+
+}
+
+
+
+.about-text {
+
+  flex: 1;
+
+  min-width: 300px;
+
+}
+
+
+/* ================= FLOATING ABOUT IMAGE ================= */
+
+.about-image {
+  flex: 0 0 400px;
+  position: relative;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 28px;
+  border: none;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  animation: floatImage 6s ease-in-out infinite;
+  transition:
+    transform 0.4s cubic-bezier(.22,.8,.22,1),
+    box-shadow 0.4s ease,
+    animation-play-state 0.3s ease;
+  will-change: transform;
+}
+
+/* Floating motion */
+@keyframes floatImage {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+/* Hover interaction */
+.about-image:hover img {
+  transform: scale(1.07);
+  animation-play-state: paused;
+  box-shadow: 0 45px 90px rgba(0,0,0,0.65);
+}
+
+
+@media (max-width: 768px) {
+
+  .about-container { gap: 30px; }
+
+  .about-image { flex: 1 1 100%; order: -1; } /* Image on top on mobile */
+
+}
+/* ================= ABOUT TAGS ================= */
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.about-tags span {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(143,162,255,0.12);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.about-tags span:hover {
+  transform: translateY(-4px);
+  background: rgba(143,162,255,0.28);
+}
   </style>
 </head>
 <body>
-
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
-
 <nav>
   <strong>Sheila Sil</strong>
   <div>
@@ -321,34 +718,56 @@ body::after {
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
+    <a href="form.html">Professional Inquiry</a>
   </div>
 </nav>
-
 <section class="hero">
+
   <!-- Hero content stays first -->
+
   <div class="hero-content">
     <h1 id="hero-title">Portfolio<br><span>Sheila Sil</span></h1>
     <p id="hero-sub">Founder • Coding Mentor • STEM Leader</p>
-
     <div class="metrics">
       <div class="metric"><h2>25+</h2><p>Students taught</p></div>
       <div class="metric"><h2>100%</h2><p>Passion</p></div>
       <div class="metric"><h2>10+</h2><p>Projects & curricula</p></div>
     </div>
   </div>
-
   <!-- Background particles remain behind everything -->
   <canvas id="heroParticles" style="position:absolute;inset:0;pointer-events:none;"></canvas>
 </section>
-
-
 <section id="about" class="reveal">
   <h2 class="section-title">About</h2>
-  <p style="max-width:900px;color:var(--muted);line-height:1.7">
-    High school student and founder of a self-run coding course, focused on teaching Scratch, HTML, CSS, and JavaScript to young learners. Passionate about education, leadership, and building clean, scalable learning experiences.
+  <div class="about-container">
+    <div class="about-text">
+      <p style="color:var(--muted); line-height:1.7; font-size: 1.1rem;">
+        High school student and founder of a self-run coding course, focused on teaching Scratch, HTML, CSS, and JavaScript to young learners. Passionate about education, leadership, and building clean, scalable learning experiences. 
+        <br><br>
+        I believe that coding is a way of thinking that empowers the next generation of creators. Whether I'm mentoring at TheCoderSchool or building my own curriculum, my goal is to make STEM accessible and exciting.
+      </p>
+      <div class="about-text">
+  <p style="color:var(--muted); line-height:1.7; font-size: 1.1rem;">
+    High school student and founder of a self-run coding course, focused on teaching Scratch, HTML, CSS, and JavaScript to young learners. Passionate about education, leadership, and building clean, scalable learning experiences. 
+    <br><br>
+    I believe that coding is a way of thinking that empowers the next generation of creators. Whether I'm mentoring at TheCoderSchool or building my own curriculum, my goal is to make STEM accessible and exciting.
   </p>
-</section>
 
+  
+  <div class="about-tags">
+    <span>Founder</span>
+    <span>Coding Mentor</span>
+    <span>STEM Leader</span>
+    <span>Curriculum Designer</span>
+  </div>
+</div>
+    </div>
+    
+    <div class="about-image">
+      <img src="https://image2url.com/r2/default/files/1770682350170-fb069557-2233-44d5-8790-a372e63a4e9e.png" alt="Sheila Sil">
+    </div>
+  </div>
+</section>
 <section id="experience" class="reveal">
   <h2 class="section-title">Experience</h2>
   <div class="timeline">
@@ -364,22 +783,30 @@ body::after {
     </div>
   </div>
 </section>
-
 <div class="marquee">
   <div class="marquee-track">
+
     <span>HTML • CSS • JavaScript • Java • Python • Scratch • Leadership • Communication •</span>
+
     <span>HTML • CSS • JavaScript • Java • Python • Scratch • Leadership • Communication •</span>
   </div>
 </div>
-
 <section id="projects" class="reveal">
+
   <h2 class="section-title">Profiles</h2>
+
   <div class="projects">
+
  <div class="project">
-      <img src="https://u.cubeupload.com/Blakkie/Profile.png" />
+
+      <img src="https://image2url.com/r2/default/files/1770683165418-d7c1444b-d2d4-4336-b43a-154e38eab624.png" />
+
       <div class="project-overlay">
+
         <h3>Scratch Profile</h3>
-        <a href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
+
+        <a
+href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
       </div>
     </div>
     <div class="project">
