@@ -117,6 +117,15 @@ nav a:hover{color:white;}
 
 @keyframes fadeDown{from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:none;}}
 
+.progress-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  width:0%;
+  z-index:2000;
+}
 
 
 /* ================= HERO ================= */
@@ -526,6 +535,22 @@ section{padding:120px 10%}
   transition: transform .35s ease, box-shadow .35s ease;
 
 }
+  .project {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--glass-border);
+  height: 260px; /* ADD THIS */
+}
+.project img {
+  width: 100%;
+  height: 100%;        /* ADD THIS */
+  object-fit: cover;   /* IMPORTANT */
+  display: block;
+  transition: .6s;
+}
+
 
 .project:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 40px rgba(0,0,0,.35);}
 
@@ -814,18 +839,18 @@ body::after {
         <h3>Scratch Profile</h3>
 
         <a
-href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
+href="https://scratch.mit.edu/users/samiksil/" target="_blank">Scratch</a>
       </div>
     </div>
     <div class="project">
-      <img src="https://repository-images.githubusercontent.com/500872269/5f43de8e-a1ea-4847-a0fd-ae3ddeaec679" />
+      <img src="https://image2url.com/r2/default/images/1771038405751-f3f08fb9-74af-4744-917d-e9074c778b26.png" />
       <div class="project-overlay">
         <h3>Github Profile</h3>
-        <a href="https://github.com/Sheila-Sil" target="_blank">GitHub</a>
+        <a href="https://scratch.mit.edu/users/samiksil/" target="_blank">GitHub</a>
       </div>
     </div>
 <div class="project">
-      <img src="https://airisx.com/wp-content/uploads/2023/01/21251671_6392206-scaled.jpg" />
+      <img src="https://image2url.com/r2/default/images/1771038597377-10b09a55-37d1-444e-bf49-9d5a8d3f47f4.png" />
       <div class="project-overlay">
         <h3>Linkedin Profile</h3>
         <a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank">Linkedin</a>
@@ -837,24 +862,24 @@ href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
   <h2 class="section-title">Projects</h2>
   <div class="projects">
  <div class="project">
-      <img src="https://u.cubeupload.com/Blakkie/Profile.png" />
+      <img src="https://image2url.com/r2/default/images/1771039274343-fcd39958-ebc7-4677-ba7a-d0233920b5ed.png" />
       <div class="project-overlay">
         <h3>Oak Pine Community Hub</h3>
-        <a href="https://github.com/Sheila-Sil" target="_blank">Scratch</a>
+        <a href="https://oak-pine-community-hub-lemon.vercel.app/" target="_blank">Click Here</a>
       </div>
     </div>
     <div class="project">
-      <img src="https://repository-images.githubusercontent.com/500872269/5f43de8e-a1ea-4847-a0fd-ae3ddeaec679" />
+      <img src="https://image2url.com/r2/default/images/1771039004573-e317cfb2-f68e-4225-9734-29e824117342.png" />
       <div class="project-overlay">
-        <h3>Boat Ride</h3>
-        <a href="https://github.com/Sheila-Sil" target="_blank">GitHub</a>
+        <h3>Apatosaurus</h3>
+        <a href="https://sheila-sil.github.io/english-research-project/" target="_blank">Click Here</a>
       </div>
     </div>
 <div class="project">
-      <img src="https://airisx.com/wp-content/uploads/2023/01/21251671_6392206-scaled.jpg" />
+      <img src="https://image2url.com/r2/default/images/1771039133099-01266a5d-fda2-4872-b6d5-c4a75319fe13.png" />
       <div class="project-overlay">
-        <h3>idk</h3>
-        <a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank">Linkedin</a>
+        <h3>Portfolio</h3>
+        <a href="https://sheila-sil.github.io/portfolio/" target="_blank">Click Here</a>
       </div>
     </div>
   </div>
@@ -881,6 +906,17 @@ document.addEventListener('mousemove',e=>{
   ring.style.left=rx+'px'; ring.style.top=ry+'px';
   requestAnimationFrame(loop);
 })();
+
+  
+const progress = document.createElement("div");
+progress.className = "progress-bar";
+document.body.appendChild(progress);
+
+window.addEventListener("scroll", () => {
+  const scrolled = window.scrollY;
+  const height = document.body.scrollHeight - window.innerHeight;
+  progress.style.width = (scrolled / height) * 100 + "%";
+});
 
 /* ================= SCROLL REVEALS ================= */
 const reveals=document.querySelectorAll('.reveal');
