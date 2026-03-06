@@ -61,7 +61,34 @@ body{
   overflow-x:hidden;
 
 }
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease;
+}
 
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  /* The 'spring' feel comes from the JS loop, not CSS transitions */
+}
+
+@media(max-width:900px){
+  .cursor-dot, .cursor-ring { display:none; }
+  * { cursor: auto; } /* Restore cursor on mobile */
+}
 
 body::before{
   content:"";
@@ -83,12 +110,58 @@ body::before{
 
 }
 
-.cursor-dot{width:6px;height:6px;background:white;border-radius:50%;}
+.cursor-dot{width:15px;height:15px;background:white;border-radius:50%;}
 
 .cursor-ring{width:38px;height:38px;border:1px solid rgba(255,255,255,.35);border-radius:50%;}
 
 @media(max-width:900px){.cursor-dot,.cursor-ring{display:none}}
+.scroll-container {
+  position: absolute;
+  bottom: 50px;
+  right: 10%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
 
+.scroll-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotateText 10s linear infinite;
+}
+
+.scroll-text text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.scroll-arrow {
+  font-size: 2rem;
+  color: var(--accent);
+  animation: bounce 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes rotateText {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
 
 
 /* ================= NAV ================= */
@@ -744,6 +817,111 @@ body::after {
   transform: translateY(-4px);
   background: rgba(143,162,255,0.28);
 }
+  /* ================= MOBILE OPTIMIZATION ================= */
+
+@media (max-width: 768px) {
+
+  nav{
+    padding:14px 6%;
+  }
+
+  nav div{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  nav a{
+    margin-left:0;
+    font-size:.9rem;
+  }
+
+  section{
+    padding:90px 6%;
+  }
+
+  /* HERO */
+
+  .hero{
+    padding-left:6%;
+    height:auto;
+    min-height:100vh;
+  }
+
+  .hero-content h1{
+    font-size:2.4rem;
+    white-space:normal; /* allow wrapping */
+    line-height:1.25;
+  }
+
+  .hero-content p{
+    font-size:1.2rem;
+    margin-bottom:30px;
+  }
+
+  /* METRICS */
+
+  .metrics{
+    gap:18px;
+    margin-top:20px;
+  }
+
+  .metric{
+    padding:20px;
+  }
+
+  .metric h2{
+    font-size:2rem;
+  }
+
+  .metric p{
+    font-size:.9rem;
+  }
+
+  /* PROJECT GRID */
+
+  .projects{
+    grid-template-columns:1fr;
+  }
+
+  .project{
+    height:200px;
+  }
+
+  /* ABOUT */
+
+  .about-container{
+    gap:30px;
+  }
+
+  .about-image{
+    flex:1 1 100%;
+  }
+
+  /* TIMELINE */
+
+  .timeline{
+    padding-left:30px;
+  }
+
+  .tl-item::before{
+    left:-20px;
+  }
+
+  /* SCROLL INDICATOR */
+
+  .scroll-container{
+    width:100px;
+    height:100px;
+    right:5%;
+    bottom:30px;
+  }
+
+  .scroll-text text{
+    font-size:10px;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -751,13 +929,19 @@ body::after {
 <div class="cursor-ring"></div>
 <nav>
   <strong>Sheila Sil</strong>
-  <div>
+  
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
     <a href="form.html">Professional Inquiry</a>
-  </div>
 </nav>
 <section class="hero">
 
@@ -772,6 +956,7 @@ body::after {
       <div class="metric"><h2>10+</h2><p>Projects & curricula</p></div>
     </div>
   </div>
+  
   <!-- Background particles remain behind everything -->
   <canvas id="heroParticles" style="position:absolute;inset:0;pointer-events:none;"></canvas>
 </section>
