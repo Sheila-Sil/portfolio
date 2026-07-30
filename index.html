@@ -112,7 +112,6 @@
   }
   nav.scrolled{border-bottom-color:var(--border);background:rgba(255,255,255,0.06);box-shadow:0 8px 32px -12px rgba(0,0,0,0.4), inset 0 -1px 0 rgba(255,255,255,0.06);}
   .logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:1rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px;}
-  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange);}
   .nav-links{display:flex;gap:30px;font-size:0.88rem;font-family:'JetBrains Mono',monospace;}
   .nav-links a{color:var(--ink-soft);position:relative;padding:4px 0;transition:color .2s;}
   .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--teal);transition:width .25s;}
@@ -336,19 +335,21 @@
   footer{border-top:1px solid var(--border);padding:26px 24px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--ink-faint);position:relative;z-index:1;}
   footer b{color:var(--ink-soft);}
 
-  @media (max-width:860px){
-    .nav-links,.nav-cta{display:none;}
-    .burger{display:flex;}
-    #hero{grid-template-columns:1fr;padding-top:130px;text-align:left;}
-    .hero-visual{justify-self:start;margin-top:10px;}
-    #about{grid-template-columns:1fr;}
-    .about-stats{grid-template-columns:1fr 1fr;}
-    .skills-grid{grid-template-columns:1fr;}
-    .proj-grid{grid-template-columns:1fr;}
-    .edu-grid{grid-template-columns:1fr;}
-    section{padding:80px 20px;}
-    .cursor-dot{display:none;}
-  }
+@media (max-width:860px){
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:flex;}
+  #hero{grid-template-columns:1fr;padding-top:130px;text-align:left;}
+  .hero-visual{justify-self:start;margin-top:10px;}
+  .editor-photo{display:none;}      /*maybe change*/
+  .hero-visual{display:none;}
+  #about{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  .proj-grid{grid-template-columns:1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  section{padding:80px 20px;}
+  .cursor-dot{display:none;}
+}
   @media (max-width:480px){
     .editor-window{width:82vw;}
     .exp-top{flex-direction:column;}
@@ -429,7 +430,7 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav id="nav">
-  <a href="#hero" class="logo"><span class="dot"></span>sheila.sil()</a>
+  <a href="#hero" class="logo">sheila.sil()</a>
   <div class="nav-links">
     <a href="#about">about</a>
     <a href="#journey">journey</a>
@@ -456,7 +457,7 @@
 
   <section id="hero">
     <div class="hero-copy">
-      <span class="kicker">Katy, Texas — sophmore, class of 2029</span>
+      <span class="kicker">Katy, Texas — sophomore, class of 2029</span>
       <h1>Sheila Sil, the myth, the <span>legend</span></h1>
       <div class="hero-type-row"><span class="prompt">$</span> <span id="typeTarget"></span><span class="caret"></span></div>
       <p class="hero-desc">Founder of Sheila's Coding Course and LaunchOS, code coach at TheCoderSchool, and a competitive coder with regional, state, and national finishes. I'm an avid learner and mentor of CS.</p>
@@ -484,7 +485,7 @@
     <div class="about-body reveal">
       <div class="eyebrow">WHO is this</div>
       <h2 class="section-title">Half classroom, half codebase.</h2>
-      <p>Sheila is a sophmore at <strong>Seven Lakes High School</strong> who started coding young, and decided the most useful thing she could do with it was hand it to someone younger. In July 2024 she launched <strong>SSC (Sheila's Coding Course)</strong>, a self-run program for students aged 7–11 that starts in Scratch and works up through HTML, CSS, and JavaScript, with lessons rebuilt around however each kid actually learns.</p>
+      <p>Sheila is a sophomore at <strong>Seven Lakes High School</strong> who started coding young, and decided the most useful thing she could do with it was hand it to someone younger. In July 2024 she launched <strong>SSC (Sheila's Coding Course)</strong>, a self-run program for students aged 7–11 that starts in Scratch and works up through HTML, CSS, and JavaScript, with lessons rebuilt around however each kid actually learns.</p>
       <p>She's since taken that same energy to <strong>TheCoderSchool</strong> as a Code Coach. Outside the (real and virtual) classroom, she's active in Girls Who Code, NHS, CSHS, the Technology Student Association, and the Tech Entrepreneurship Club. </p>
       <div class="about-stats">
         <div class="stat-card"><div class="num" data-count="15">0</div><div class="lbl">Years Old</div></div>
@@ -702,7 +703,7 @@
     <div class="edu-grid">
       <div class="edu-card reveal">
         <h3>Seven Lakes High School</h3>
-        <div class="sub">Katy, TX — Freshman, Class of 2029</div>
+        <div class="sub">Katy, TX — Sophomore, Class of 2029</div>
         <div class="edu-row"><span>Courses</span><b>AP CS Principles, AP CS A, UNITY DEV</b></div>
         <div class="edu-row"><span>Clubs</span><b>CS Club, CSHS, NHS</b></div>
         <div class="edu-row"><span></span><b>Girls Who Code, TSA, Tech Entrepreneurship Club</b></div>
