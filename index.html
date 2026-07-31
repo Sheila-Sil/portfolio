@@ -411,11 +411,64 @@
   }
   .loader-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
   .loader-label{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--ink-faint);letter-spacing:0.04em;}
-  
+  /* ===========================
+   Mobile Interactions
+=========================== */
+
+@media (hover:none){
+
+  .tilt{
+      transform:none !important;
+  }
+
+  .tilt:active{
+      transform:scale(.98);
+  }
+
+  .magnetic{
+      transform:none !important;
+  }
+
+  .btn:active,
+  .nav-cta:active{
+      transform:scale(.96);
+  }
+
+  .proj-card:active{
+      transform:scale(.98);
+  }
+
+  .exp-card:active{
+      transform:translateY(-4px);
+  }
+
+  .chip:active{
+      transform:scale(.95);
+      color:var(--teal);
+      border-color:var(--teal);
+  }
+
+  .float-chip:active{
+      transform:scale(1.08);
+  }
+
+}
+  #pixelCanvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    pointer-events:none;
+}
+
+body{
+    position:relative;
+}
 </style>
 </head>
 <body>
-
+<canvas id="pixelCanvas"></canvas>
 <div class="ambient"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
 
 <div id="loader">
@@ -491,7 +544,7 @@
         <div class="stat-card"><div class="num" data-count="15">0</div><div class="lbl">Years Old</div></div>
         <div class="stat-card"><div class="num" data-count="30" data-suffix="+">0</div><div class="lbl">Students Mentored</div></div>
         <div class="stat-card"><div class="num" data-count="2">0</div><div class="lbl">National Awards</div></div>
-        <div class="stat-card"><div class="num" data-count="3">0</div><div class="lbl">Projects</div></div>
+        <div class="stat-card"><div class="num" data-count="3">0</div><div class="lbl">Languages spoken</div></div>
       </div>
     </div>
   </section>
@@ -917,6 +970,141 @@
     });
   }, {threshold:0.5});
   countEls.forEach(el=>countIO.observe(el));
+/* ===========================
+   Pixel Canvas Background
+=========================== */
+
+(() => {
+
+const canvas = document.getElementById("pixelCanvas");
+const ctx = canvas.getContext("2d");
+
+let w,h;
+let cols,rows;
+const size = 9;
+
+const colors = [
+    "#8b4f2a",
+    "#2b6f69",
+    "#8c4444",
+    "#7e6830"
+];
+
+let pixels=[];
+
+function resize(){
+
+    w = canvas.width = window.innerWidth * devicePixelRatio;
+    h = canvas.height = window.innerHeight * devicePixelRatio;
+
+    canvas.style.width = window.innerWidth+"px";
+    canvas.style.height = window.innerHeight+"px";
+
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+
+    cols = Math.ceil(window.innerWidth/size);
+    rows = Math.ceil(window.innerHeight/size);
+
+    pixels=[];
+
+    for(let y=0;y<rows;y++){
+
+        for(let x=0;x<cols;x++){
+
+            pixels.push({
+
+                x:x*size,
+                y:y*size,
+                alpha:0,
+                color:colors[Math.floor(Math.random()*colors.length)]
+
+            });
+
+        }
+
+    }
+
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+let pointer={x:-999,y:-999};
+
+window.addEventListener("mousemove",e=>{
+
+    pointer.x=e.clientX;
+    pointer.y=e.clientY;
+
+});
+
+window.addEventListener("touchmove",e=>{
+
+    pointer.x=e.touches[0].clientX;
+    pointer.y=e.touches[0].clientY;
+
+},{passive:true});
+
+window.addEventListener("touchstart",e=>{
+
+    pointer.x=e.touches[0].clientX;
+    pointer.y=e.touches[0].clientY;
+
+},{passive:true});
+
+window.addEventListener("mouseleave",()=>{
+
+    pointer.x=-999;
+    pointer.y=-999;
+
+});
+
+function animate(){
+
+    ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+    for(const p of pixels){
+
+        const dx=pointer.x-p.x;
+        const dy=pointer.y-p.y;
+
+        const d=Math.sqrt(dx*dx+dy*dy);
+
+        if(d<50){
+            p.alpha=Math.max(
+                p.alpha,
+                1-d/70
+            );
+
+        }
+
+        p.alpha*=.98;
+
+        if(p.alpha<0.01) continue;
+
+        ctx.globalAlpha=p.alpha;
+
+        ctx.fillStyle=p.color;
+
+        ctx.fillRect(
+            p.x,
+            p.y,
+            size-1,
+            size-1
+        );
+
+    }
+
+    ctx.globalAlpha=1;
+
+    requestAnimationFrame(animate);
+
+}
+
+animate();
+
+})();
 </script>
 </body>
 </html>
