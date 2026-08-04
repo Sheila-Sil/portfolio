@@ -465,6 +465,32 @@
 body{
     position:relative;
 }
+
+  /* Codex CLI inspired landing */
+  body{background:#000;color:#e7e7e7;}
+  body::before,.ambient,#pixelCanvas{display:none;}
+  nav{position:sticky;top:0;justify-content:center;gap:30px;padding:0 24px;height:46px;background:#000;border-bottom:1px solid rgba(255,255,255,.09);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .logo,.nav-cta{display:none;}
+  .nav-links{gap:30px;font-family:Inter,sans-serif;font-size:1rem;align-items:stretch;height:100%;}
+  .nav-links a{display:flex;align-items:center;color:#dcdcdc;padding:0;border-bottom:2px solid transparent;}
+  .nav-links a.active,.nav-links a:hover{color:#fff;border-bottom-color:#f2f2f2;}
+  .nav-links a::after{display:none;}
+  #hero{display:flex;flex-direction:column;gap:74px;max-width:1280px;min-height:auto;padding:42px 26px 92px;text-align:center;}
+  .hero-copy{max-width:1160px;margin:0 auto;}
+  .hero-copy .kicker{color:#dcdcdc;font-family:Inter,sans-serif;font-weight:700;margin-bottom:26px;}
+  .hero-copy h1{font-family:Inter,sans-serif;font-size:clamp(4.1rem,8.2vw,7.2rem);font-weight:500;line-height:.96;letter-spacing:-.075em;margin:0 auto 40px;max-width:1120px;color:#e3e3e3;}
+  .hero-desc{max-width:820px;margin:0 auto 18px;color:#e6edf8;font-size:1.12rem;line-height:2;}
+  .hero-desc strong{color:#fff;font-family:'JetBrains Mono',monospace;font-size:.95em;}
+  .hero-actions{justify-content:center;margin-top:14px;}
+  .btn{font-family:Inter,sans-serif;font-size:1rem;padding:13px 23px;}
+  .btn-primary{background:#f4f4f4;color:#171717;box-shadow:none;}
+  .btn-ghost{background:#202020;border-color:#202020;color:#e8e8e8;box-shadow:none;}
+  .terminal-window{width:min(1240px,100%);margin:0 auto;border:1px solid #25304d;border-radius:10px;overflow:hidden;background:#101726;box-shadow:none;text-align:left;}
+  .terminal-titlebar{height:40px;background:#080d20;display:flex;align-items:center;gap:10px;padding:0 25px;}
+  .terminal-body{min-height:480px;padding:19px 30px 27px;color:#c5e0ff;font-size:14px;line-height:1.55;}
+  .terminal-line{margin-bottom:10px}.prompt{color:#dbeafe;margin-right:8px}.terminal-line .prompt{color:#95bfff}.terminal-line{color:#39a8ff}.terminal-panel{width:min(425px,100%);border:1px solid #9eb8dc;border-radius:4px;padding:12px 14px;margin:6px 0 29px;color:#bcd7ff}.panel-line{color:#fff;margin-bottom:20px}.panel-grid{display:grid;grid-template-columns:90px 1fr;gap:0;color:#bcd7ff}.panel-grid b{color:#fff;font-weight:700}.terminal-help{margin:0 0 18px 16px}.command-list{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin:0 0 28px 16px}.command-list button{appearance:none;border:0;background:transparent;color:#fff;font:inherit;cursor:pointer;padding:0}.command-list button::after{content:' - open section';color:#a9c9ef}.command-list button:hover{color:#4fd1c5}.terminal-output{margin:0 0 18px 16px;min-height:56px}.terminal-response{white-space:pre-wrap}.terminal-input-row{display:flex;align-items:center;margin-left:0}.terminal-input-row input{flex:1;background:transparent;border:0;outline:0;color:#fff;font:inherit;caret-color:#fff}.terminal-input-row input::placeholder{color:#7891af}
+  @media (max-width:860px){nav{justify-content:space-between}.logo{display:flex}.nav-links{display:none}#hero{padding-top:56px;gap:42px}.hero-copy h1{font-size:clamp(3rem,14vw,5rem)}.terminal-body{padding:16px;min-height:420px}.command-list{gap:8px}}
+
 </style>
 </head>
 <body>
@@ -483,16 +509,16 @@ body{
 <div class="progress-bar" id="progressBar"></div>
 
 <nav id="nav">
-  <a href="#hero" class="logo">sheila.sil()</a>
+  <a href="#hero" class="logo">Sheila CLI</a>
   <div class="nav-links">
-    <a href="#about">about</a>
-    <a href="#journey">journey</a>
-    <a href="#experience">experience</a>
-    <a href="#projects">projects</a>
-    <a href="#skills">skills</a>
-    <a href="#awards">awards</a>
+    <a href="#hero" class="active">Overview</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
   </div>
-  <a href="#contact" class="nav-cta magnetic"><span class="mag-inner">say hi ↗</span></a>
+  <a href="#contact" class="nav-cta magnetic"><span class="mag-inner">Contact ↗</span></a>
   <div class="burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
 
@@ -509,27 +535,44 @@ body{
 <main>
 
   <section id="hero">
-    <div class="hero-copy">
-      <span class="kicker">Katy, Texas — sophomore, class of 2029</span>
-      <h1>Sheila Sil, the myth, the <span>legend</span></h1>
-      <div class="hero-type-row"><span class="prompt">$</span> <span id="typeTarget"></span><span class="caret"></span></div>
-      <p class="hero-desc">Founder of Sheila's Coding Course and LaunchOS, code coach at TheCoderSchool, and a competitive coder with regional, state, and national finishes. I'm an avid learner and mentor of CS.</p>
+    <div class="hero-copy reveal">
+      <span class="kicker">Sheila Sil Portfolio CLI</span>
+      <h1>Build, teach, and launch code from the terminal</h1>
+      <p class="hero-desc">Explore Sheila's work like a command line. Type <strong>/about</strong>, <strong>/experience</strong>, <strong>/projects</strong>, <strong>/skills</strong>, or <strong>/contact</strong> in the terminal below.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary magnetic"><span class="mag-inner">view projects</span></a>
-        <a href="#contact" class="btn btn-ghost magnetic"><span class="mag-inner">get in touch</span></a>
+        <a href="#terminalCard" class="btn btn-primary magnetic"><span class="mag-inner">Open terminal →</span></a>
+        <a href="#projects" class="btn btn-ghost magnetic"><span class="mag-inner">View projects →</span></a>
       </div>
     </div>
-    <div class="hero-visual reveal">
-      <div class="editor-window">
-        <div class="editor-bar">
-          <span class="tf r"></span><span class="tf y"></span><span class="tf g"></span>
-          <span class="fname">profile.png</span>
-        </div>
-        <img class="editor-photo" src="https://image2url.com/r2/default/files/1770682350170-fb069557-2233-44d5-8790-a372e63a4e9e.png" alt="Portrait of Sheila Sil">
-        <div class="editor-caption"><b>&lt;/&gt;</b> const mentor = "Sheila Sil";</div>
+
+    <div class="terminal-window reveal" id="terminalCard" aria-label="Interactive portfolio terminal">
+      <div class="terminal-titlebar" aria-hidden="true">
+        <span class="tf r"></span><span class="tf y"></span><span class="tf g"></span>
       </div>
-      <div class="float-chip one">Code Coach</div>
-      <div class="float-chip two">Founder</div>
+      <div class="terminal-body mono" id="portfolioTerminal" role="log" aria-live="polite">
+        <div class="terminal-line"><span class="prompt">$</span> sheila</div>
+        <div class="terminal-panel">
+          <div class="panel-line">› <strong>Sheila Sil</strong></div>
+          <div class="panel-grid"><span>role:</span><b>student developer · founder · code coach</b></div>
+          <div class="panel-grid"><span>directory:</span><b>~/portfolio</b></div>
+        </div>
+        <div class="terminal-help">To get started, type a command or click one below:</div>
+        <div class="command-list" aria-label="Available terminal commands">
+          <button type="button" data-command="/about">/about</button>
+          <button type="button" data-command="/experience">/experience</button>
+          <button type="button" data-command="/projects">/projects</button>
+          <button type="button" data-command="/skills">/skills</button>
+          <button type="button" data-command="/contact">/contact</button>
+          <button type="button" data-command="/help">/help</button>
+        </div>
+        <div id="terminalOutput" class="terminal-output">
+          <div class="terminal-response">Try <b>/about</b> to jump into Sheila's story.</div>
+        </div>
+        <form id="terminalForm" class="terminal-input-row" autocomplete="off">
+          <label for="terminalInput" class="prompt">›</label>
+          <input id="terminalInput" name="terminalInput" type="text" spellcheck="false" placeholder="/about" aria-label="Type a portfolio command">
+        </form>
+      </div>
     </div>
   </section>
 
@@ -857,21 +900,65 @@ body{
 
   ];
   const typeTarget = document.getElementById('typeTarget');
-  let pIndex=0, cIndex=0, deleting=false;
-  function typeLoop(){
-    const current = phrases[pIndex];
-    if(!deleting){
-      cIndex++;
-      typeTarget.textContent = current.slice(0,cIndex);
-      if(cIndex===current.length){ deleting=true; setTimeout(typeLoop, 1600); return; }
-    } else {
-      cIndex--;
-      typeTarget.textContent = current.slice(0,cIndex);
-      if(cIndex===0){ deleting=false; pIndex=(pIndex+1)%phrases.length; }
+  if(typeTarget){
+    let pIndex=0, cIndex=0, deleting=false;
+    function typeLoop(){
+      const current = phrases[pIndex];
+      if(!deleting){
+        cIndex++;
+        typeTarget.textContent = current.slice(0,cIndex);
+        if(cIndex===current.length){ deleting=true; setTimeout(typeLoop, 1600); return; }
+      } else {
+        cIndex--;
+        typeTarget.textContent = current.slice(0,cIndex);
+        if(cIndex===0){ deleting=false; pIndex=(pIndex+1)%phrases.length; }
+      }
+      setTimeout(typeLoop, deleting?35:65);
     }
-    setTimeout(typeLoop, deleting?35:65);
+    typeLoop();
   }
-  typeLoop();
+
+  const terminalForm = document.getElementById('terminalForm');
+  const terminalInput = document.getElementById('terminalInput');
+  const terminalOutput = document.getElementById('terminalOutput');
+  const commandMap = {
+    "/about": {target:"about", text:"Opening /about — sophomore at Seven Lakes High School, founder of Sheila's Coding Course, and mentor for young coders."},
+    '/experience': {target:'experience', text:'Opening /experience — Mentor & Owner at SSC and Code Coach at TheCoderSchool.'},
+    '/projects': {target:'projects', text:'Opening /projects — LaunchOS, Oak Pine Community Hub, and more shipped work.'},
+    '/skills': {target:'skills', text:'Opening /skills — Scratch, HTML, CSS, JavaScript, Java, Python, and AI foundations.'},
+    '/contact': {target:'contact', text:'Opening /contact — email, phone, LinkedIn, and GitHub links are ready.'},
+    '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
+    '/clear': {clear:true}
+  };
+  function runPortfolioCommand(raw){
+    if(!terminalOutput) return;
+    const command = (raw || '').trim().toLowerCase();
+    if(!command) return;
+    const item = commandMap[command];
+    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
+    const row = document.createElement('div');
+    row.className = 'terminal-response';
+    row.innerHTML = `<span class="prompt">›</span>${command}
+${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
+    terminalOutput.appendChild(row);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    if(item?.target){
+      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
+    }
+  }
+  terminalForm?.addEventListener('submit', e=>{
+    e.preventDefault();
+    runPortfolioCommand(terminalInput.value);
+    terminalInput.value = '';
+  });
+  document.querySelectorAll('[data-command]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const command = btn.dataset.command;
+      terminalInput.value = command;
+      runPortfolioCommand(command);
+      terminalInput.focus();
+    });
+  });
 
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
