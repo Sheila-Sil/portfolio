@@ -494,6 +494,12 @@ body{
     inset:0;
     z-index:0;
     pointer-events:none;
+    opacity:.38;
+    mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.68'/%3E%3C/svg%3E");
+    background-size:180px 180px;
+  }
+  .ambient{display:none;}
     opacity:.22;
     mix-blend-mode:screen;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.68'/%3E%3C/svg%3E");
@@ -525,6 +531,21 @@ body{
   .terminal-body{min-height:480px;padding:19px 30px 27px;color:#c5e0ff;font-size:14px;line-height:1.55;}
   .terminal-line{margin-bottom:10px}.prompt{color:#dbeafe;margin-right:8px}.terminal-line .prompt{color:#95bfff}.terminal-line{color:#39a8ff}.terminal-panel{width:min(425px,100%);border:1px solid #9eb8dc;border-radius:4px;padding:12px 14px;margin:6px 0 29px;color:#bcd7ff}.panel-line{color:#fff;margin-bottom:20px}.panel-grid{display:grid;grid-template-columns:90px 1fr;gap:0;color:#bcd7ff}.panel-grid b{color:#fff;font-weight:700}.terminal-help{margin:0 0 18px 16px}.command-list{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin:0 0 28px 16px}.command-list button{appearance:none;border:0;background:transparent;color:#fff;font:inherit;cursor:pointer;padding:0}.command-list button::after{content:' - open section';color:#a9c9ef}.command-list button:hover{color:#4fd1c5}.terminal-output{margin:0 0 18px 16px;min-height:56px}.terminal-response{white-space:pre-wrap}.terminal-input-row{display:flex;align-items:center;margin-left:0}.terminal-input-row input{flex:1;background:transparent;border:0;outline:0;color:#fff;font:inherit;caret-color:#fff}.terminal-input-row input::placeholder{color:#7891af}
   @media (max-width:860px){nav{justify-content:space-between}.logo{display:flex}.nav-links{display:none}#hero{padding-top:56px;gap:42px}.hero-copy h1{font-size:clamp(3rem,14vw,5rem)}.terminal-body{padding:16px;min-height:420px}.command-list{gap:8px}}
+
+  html{scroll-padding-top:68px;}
+  @keyframes terminalBlink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+  @keyframes featuredMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .terminal-input-row{position:relative;width:fit-content;max-width:100%;}
+  .terminal-input-row input{flex:0 1 auto;width:clamp(120px,42vw,520px);caret-color:transparent;}
+  .terminal-input-row::after{content:'';width:10px;height:1.25em;background:#f8fbff;display:inline-block;margin-left:3px;box-shadow:0 0 12px rgba(248,251,255,.45);animation:terminalBlink 1s steps(1,end) infinite;}
+  .featured-marquee{position:relative;z-index:1;max-width:none;width:100%;padding:48px 0 32px;margin:-24px 0 18px;overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);}
+  .featured-marquee::before,.featured-marquee::after{content:'';position:absolute;top:0;bottom:0;width:14vw;z-index:2;pointer-events:none;}
+  .featured-marquee::before{left:0;background:linear-gradient(90deg,#000,transparent);}
+  .featured-marquee::after{right:0;background:linear-gradient(270deg,#000,transparent);}
+  .featured-track{display:flex;width:max-content;animation:featuredMarquee 24s linear infinite;will-change:transform;}
+  .featured-track span{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,15vw,14rem);font-weight:700;line-height:.8;letter-spacing:-.08em;text-transform:uppercase;white-space:nowrap;margin-right:.18em;color:transparent;-webkit-text-stroke:1.5px #f5c36d;text-stroke:1.5px #f5c36d;}
+  .featured-track span:nth-child(even){color:#f5c36d;-webkit-text-stroke:0;text-stroke:0;}
+  @media (prefers-reduced-motion:reduce){.featured-track,.terminal-input-row::after{animation:none;}}
 
 </style>
 </head>
@@ -571,6 +592,8 @@ body{
 
   <section id="hero">
     <div class="hero-copy reveal">
+      <span class="kicker">Sheila Sil Portfolio CLI</span>
+      <h1>Build, teach, and launch code from the terminal</h1>
       
       <span class="kicker">Sheila Sil CLI</span>
       <h1>Learn more about the Myth, the Legend</h1>
@@ -591,6 +614,16 @@ body{
           <div class="panel-line">› <strong>Sheila Sil</strong></div>
           <div class="panel-grid"><span>role:</span><b>student developer · founder · code coach</b></div>
           <div class="panel-grid"><span>directory:</span><b>~/portfolio</b></div>
+        </div>
+        <div class="terminal-help">To get started, type a command or click one below:</div>
+        <div class="command-list" aria-label="Available terminal commands">
+          <button type="button" data-command="/about">/about</button>
+          <button type="button" data-command="/experience">/experience</button>
+          <button type="button" data-command="/projects">/projects</button>
+          <button type="button" data-command="/skills">/skills</button>
+          <button type="button" data-command="/contact">/contact</button>
+          <button type="button" data-command="/help">/help</button>
+        </div>
         </div>
         <div class="terminal-help">To get started, type a command or click one below:</div>
         <div class="command-list" aria-label="Available terminal commands">
@@ -698,6 +731,12 @@ body{
       </ul>
     </div>
   </section>
+
+  <div class="featured-marquee" aria-label="Featured works marquee">
+    <div class="featured-track" aria-hidden="true">
+      <span>Featured Works</span><span>Project Lab</span><span>Featured Works</span><span>Project Lab</span>
+    </div>
+  </div>
 
   <section id="projects">
     <div class="eyebrow reveal">04 — projects</div>
@@ -950,6 +989,38 @@ body{
         if(cIndex===0){ deleting=false; pIndex=(pIndex+1)%phrases.length; }
       }
       setTimeout(typeLoop, deleting?35:65);
+    }
+    typeLoop();
+  }
+
+  const terminalForm = document.getElementById('terminalForm');
+  const terminalInput = document.getElementById('terminalInput');
+  const terminalOutput = document.getElementById('terminalOutput');
+  const commandMap = {
+    "/about": {target:"about", text:"Opening /about — sophomore at Seven Lakes High School, founder of Sheila's Coding Course, and mentor for young coders."},
+    '/experience': {target:'experience', text:'Opening /experience — Mentor & Owner at SSC and Code Coach at TheCoderSchool.'},
+    '/projects': {target:'projects', text:'Opening /projects — LaunchOS, Oak Pine Community Hub, and more shipped work.'},
+    '/skills': {target:'skills', text:'Opening /skills — Scratch, HTML, CSS, JavaScript, Java, Python, and AI foundations.'},
+    '/contact': {target:'contact', text:'Opening /contact — email, phone, LinkedIn, and GitHub links are ready.'},
+    '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
+    '/clear': {clear:true}
+  };
+  function runPortfolioCommand(raw){
+    if(!terminalOutput) return;
+    const command = (raw || '').trim().toLowerCase();
+    if(!command) return;
+    const item = commandMap[command];
+    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
+    const row = document.createElement('div');
+    row.className = 'terminal-response';
+    row.innerHTML = `<span class="prompt">›</span>${command}
+${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
+    terminalOutput.appendChild(row);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    if(item?.target){
+      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
+    }
+  }
     }
     typeLoop();
   }
