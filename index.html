@@ -624,6 +624,19 @@ body{
           <button type="button" data-command="/contact">/contact</button>
           <button type="button" data-command="/help">/help</button>
         </div>
+        <div id="terminalOutput" class="terminal-output">
+          <div class="terminal-response">Try <b>/about</b> to jump into Sheila's story.</div>
+        </div>
+        </div>
+        <div class="terminal-help">To get started, type a command or click one below:</div>
+        <div class="command-list" aria-label="Available terminal commands">
+          <button type="button" data-command="/about">/about</button>
+          <button type="button" data-command="/experience">/experience</button>
+          <button type="button" data-command="/projects">/projects</button>
+          <button type="button" data-command="/skills">/skills</button>
+          <button type="button" data-command="/contact">/contact</button>
+          <button type="button" data-command="/help">/help</button>
+        </div>
         </div>
         <div class="terminal-help">To get started, type a command or click one below:</div>
         <div class="command-list" aria-label="Available terminal commands">
@@ -930,11 +943,17 @@ body{
 <script>
   const loader = document.getElementById('loader');
   const loaderStart = Date.now();
-  window.addEventListener('load', ()=>{
+  let loaderHidden = false;
+  function hideLoader(){
+    if(loaderHidden || !loader) return;
+    loaderHidden = true;
     const elapsed = Date.now()-loaderStart;
     const wait = Math.max(0, 700-elapsed);
     setTimeout(()=>loader.classList.add('hidden'), wait);
-  });
+  }
+  window.addEventListener('load', hideLoader, {once:true});
+  document.addEventListener('DOMContentLoaded', ()=>setTimeout(hideLoader, 900), {once:true});
+  setTimeout(hideLoader, 1800);
 
   const cursorDot = document.getElementById('cursorDot');
   const isFinePointer = window.matchMedia('(pointer:fine)').matches;
@@ -989,6 +1008,38 @@ body{
         if(cIndex===0){ deleting=false; pIndex=(pIndex+1)%phrases.length; }
       }
       setTimeout(typeLoop, deleting?35:65);
+    }
+    typeLoop();
+  }
+
+  const terminalForm = document.getElementById('terminalForm');
+  const terminalInput = document.getElementById('terminalInput');
+  const terminalOutput = document.getElementById('terminalOutput');
+  const commandMap = {
+    "/about": {target:"about", text:"Opening /about — sophomore at Seven Lakes High School, founder of Sheila's Coding Course, and mentor for young coders."},
+    '/experience': {target:'experience', text:'Opening /experience — Mentor & Owner at SSC and Code Coach at TheCoderSchool.'},
+    '/projects': {target:'projects', text:'Opening /projects — LaunchOS, Oak Pine Community Hub, and more shipped work.'},
+    '/skills': {target:'skills', text:'Opening /skills — Scratch, HTML, CSS, JavaScript, Java, Python, and AI foundations.'},
+    '/contact': {target:'contact', text:'Opening /contact — email, phone, LinkedIn, and GitHub links are ready.'},
+    '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
+    '/clear': {clear:true}
+  };
+  function runPortfolioCommand(raw){
+    if(!terminalOutput) return;
+    const command = (raw || '').trim().toLowerCase();
+    if(!command) return;
+    const item = commandMap[command];
+    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
+    const row = document.createElement('div');
+    row.className = 'terminal-response';
+    row.innerHTML = `<span class="prompt">›</span>${command}
+${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
+    terminalOutput.appendChild(row);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    if(item?.target){
+      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
+    }
+  }
     }
     typeLoop();
   }
