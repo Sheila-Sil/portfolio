@@ -500,6 +500,9 @@ body{
     background-size:180px 180px;
   }
   .ambient{display:none;}
+  body{background:#000;color:#e7e7e7;}
+  body::before,.ambient{display:none;}
+  body::before,.ambient,#pixelCanvas{display:none;}
   nav{position:sticky;top:0;justify-content:center;gap:30px;padding:0 24px;height:46px;background:#000;border-bottom:1px solid rgba(255,255,255,.09);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
   .logo,.nav-cta{display:none;}
   .nav-links{gap:30px;font-family:Inter,sans-serif;font-size:1rem;align-items:stretch;height:100%;}
@@ -570,6 +573,8 @@ body{
     <div class="hero-copy reveal">
       <span class="kicker">Sheila Sil Portfolio CLI</span>
       <h1>Build, teach, and launch code from the terminal</h1>
+      <span class="kicker">Sheila Sil CLI</span>
+      <h1>Learn more about the Myth, the Legend</h1>
       <p class="hero-desc">Explore Sheila's work like a command line. Type <strong>/about</strong>, <strong>/experience</strong>, <strong>/projects</strong>, <strong>/skills</strong>, or <strong>/contact</strong> in the terminal below.</p>
       <div class="hero-actions">
         <a href="#terminalCard" class="btn btn-primary magnetic"><span class="mag-inner">Open terminal →</span></a>
