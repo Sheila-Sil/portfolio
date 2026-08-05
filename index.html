@@ -543,7 +543,7 @@ body{
   .featured-marquee::before{left:0;background:linear-gradient(90deg,#000,transparent);}
   .featured-marquee::after{right:0;background:linear-gradient(270deg,#000,transparent);}
   .featured-track{display:flex;width:max-content;animation:featuredMarquee 24s linear infinite;will-change:transform;}
-  .featured-track span{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,15vw,14rem);font-weight:700;line-height:.8;letter-spacing:-.08em;text-transform:uppercase;white-space:nowrap;margin-right:.18em;color:transparent;-webkit-text-stroke:1.5px #f5c36d;text-stroke:1.5px #f5c36d;}
+  .featured-track span{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,15vw,14rem);font-weight:700;line-height:.8;letter-spacing:-..05em;text-transform:uppercase;white-space:nowrap;margin-right:.18em;color:transparent;-webkit-text-stroke:1.5px #f5c36d;text-stroke:1.5px #f5c36d;}
   .featured-track span:nth-child(even){color:#f5c36d;-webkit-text-stroke:0;text-stroke:0;}
   @media (prefers-reduced-motion:reduce){.featured-track,.terminal-input-row::after{animation:none;}}
 
@@ -592,8 +592,6 @@ body{
 
   <section id="hero">
     <div class="hero-copy reveal">
-      <span class="kicker">Sheila Sil Portfolio CLI</span>
-      <h1>Build, teach, and launch code from the terminal</h1>
       
       <span class="kicker">Sheila Sil CLI</span>
       <h1>Learn more about the Myth, the Legend</h1>
@@ -628,34 +626,6 @@ body{
           <div class="terminal-response">Try <b>/about</b> to jump into Sheila's story.</div>
         </div>
         </div>
-        <div class="terminal-help">To get started, type a command or click one below:</div>
-        <div class="command-list" aria-label="Available terminal commands">
-          <button type="button" data-command="/about">/about</button>
-          <button type="button" data-command="/experience">/experience</button>
-          <button type="button" data-command="/projects">/projects</button>
-          <button type="button" data-command="/skills">/skills</button>
-          <button type="button" data-command="/contact">/contact</button>
-          <button type="button" data-command="/help">/help</button>
-        </div>
-        </div>
-        <div class="terminal-help">To get started, type a command or click one below:</div>
-        <div class="command-list" aria-label="Available terminal commands">
-          <button type="button" data-command="/about">/about</button>
-          <button type="button" data-command="/experience">/experience</button>
-          <button type="button" data-command="/projects">/projects</button>
-          <button type="button" data-command="/skills">/skills</button>
-          <button type="button" data-command="/contact">/contact</button>
-          <button type="button" data-command="/help">/help</button>
-        </div>
-        <div id="terminalOutput" class="terminal-output">
-          <div class="terminal-response">Try <b>/about</b> to jump into Sheila's story.</div>
-        </div>
-        <form id="terminalForm" class="terminal-input-row" autocomplete="off">
-          <label for="terminalInput" class="prompt">›</label>
-          <input id="terminalInput" name="terminalInput" type="text" spellcheck="false" placeholder="/about" aria-label="Type a portfolio command">
-        </form>
-      </div>
-    </div>
   </section>
 
   <section id="about">
@@ -1024,99 +994,51 @@ body{
     '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
     '/clear': {clear:true}
   };
-  function runPortfolioCommand(raw){
-    if(!terminalOutput) return;
-    const command = (raw || '').trim().toLowerCase();
-    if(!command) return;
-    const item = commandMap[command];
-    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
-    const row = document.createElement('div');
-    row.className = 'terminal-response';
-    row.innerHTML = `<span class="prompt">›</span>${command}
-${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
-    terminalOutput.appendChild(row);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    if(item?.target){
-      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
-    }
-  }
-    }
-    typeLoop();
+function runPortfolioCommand(raw){
+  if(!terminalOutput) return;
+
+  const command = (raw || '').trim().toLowerCase();
+  if(!command) return;
+
+  const item = commandMap[command];
+
+  if(item?.clear){
+    terminalOutput.innerHTML = '';
+    return;
   }
 
-  const terminalForm = document.getElementById('terminalForm');
-  const terminalInput = document.getElementById('terminalInput');
-  const terminalOutput = document.getElementById('terminalOutput');
-  const commandMap = {
-    "/about": {target:"about", text:"Opening /about — sophomore at Seven Lakes High School, founder of Sheila's Coding Course, and mentor for young coders."},
-    '/experience': {target:'experience', text:'Opening /experience — Mentor & Owner at SSC and Code Coach at TheCoderSchool.'},
-    '/projects': {target:'projects', text:'Opening /projects — LaunchOS, Oak Pine Community Hub, and more shipped work.'},
-    '/skills': {target:'skills', text:'Opening /skills — Scratch, HTML, CSS, JavaScript, Java, Python, and AI foundations.'},
-    '/contact': {target:'contact', text:'Opening /contact — email, phone, LinkedIn, and GitHub links are ready.'},
-    '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
-    '/clear': {clear:true}
-  };
-  function runPortfolioCommand(raw){
-    if(!terminalOutput) return;
-    const command = (raw || '').trim().toLowerCase();
-    if(!command) return;
-    const item = commandMap[command];
-    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
-    const row = document.createElement('div');
-    row.className = 'terminal-response';
-    row.innerHTML = `<span class="prompt">›</span>${command}
+  const row = document.createElement('div');
+  row.className = 'terminal-response';
+  row.innerHTML = `<span class="prompt">›</span>${command}
 ${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
-    terminalOutput.appendChild(row);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    if(item?.target){
-      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
-    }
-  }
-    }
-    typeLoop();
-  }
 
-  const terminalForm = document.getElementById('terminalForm');
-  const terminalInput = document.getElementById('terminalInput');
-  const terminalOutput = document.getElementById('terminalOutput');
-  const commandMap = {
-    "/about": {target:"about", text:"Opening /about — sophomore at Seven Lakes High School, founder of Sheila's Coding Course, and mentor for young coders."},
-    '/experience': {target:'experience', text:'Opening /experience — Mentor & Owner at SSC and Code Coach at TheCoderSchool.'},
-    '/projects': {target:'projects', text:'Opening /projects — LaunchOS, Oak Pine Community Hub, and more shipped work.'},
-    '/skills': {target:'skills', text:'Opening /skills — Scratch, HTML, CSS, JavaScript, Java, Python, and AI foundations.'},
-    '/contact': {target:'contact', text:'Opening /contact — email, phone, LinkedIn, and GitHub links are ready.'},
-    '/help': {text:'Available commands: /about, /experience, /projects, /skills, /contact, /help, /clear'},
-    '/clear': {clear:true}
-  };
-  function runPortfolioCommand(raw){
-    if(!terminalOutput) return;
-    const command = (raw || '').trim().toLowerCase();
-    if(!command) return;
-    const item = commandMap[command];
-    if(item?.clear){ terminalOutput.innerHTML = ''; return; }
-    const row = document.createElement('div');
-    row.className = 'terminal-response';
-    row.innerHTML = `<span class="prompt">›</span>${command}
-${item ? item.text : `Command not found: ${command}. Type /help for options.`}`;
-    terminalOutput.appendChild(row);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    if(item?.target){
-      setTimeout(()=>document.getElementById(item.target)?.scrollIntoView({behavior:'smooth', block:'start'}), 180);
-    }
+  terminalOutput.appendChild(row);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+  if(item?.target){
+    setTimeout(() => {
+      document.getElementById(item.target)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 180);
   }
-  terminalForm?.addEventListener('submit', e=>{
-    e.preventDefault();
-    runPortfolioCommand(terminalInput.value);
-    terminalInput.value = '';
+}
+
+terminalForm?.addEventListener('submit', e => {
+  e.preventDefault();
+  runPortfolioCommand(terminalInput.value);
+  terminalInput.value = '';
+});
+
+document.querySelectorAll('[data-command]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const command = btn.dataset.command;
+    terminalInput.value = command;
+    runPortfolioCommand(command);
+    terminalInput.focus();
   });
-  document.querySelectorAll('[data-command]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const command = btn.dataset.command;
-      terminalInput.value = command;
-      runPortfolioCommand(command);
-      terminalInput.focus();
-    });
-  });
+});
 
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
