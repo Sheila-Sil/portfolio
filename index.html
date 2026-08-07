@@ -546,6 +546,32 @@ body{
   .featured-track span{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,15vw,14rem);font-weight:700;line-height:.8;letter-spacing:-..05em;text-transform:uppercase;white-space:nowrap;margin-right:.18em;color:transparent;-webkit-text-stroke:1.5px #f5c36d;text-stroke:1.5px #f5c36d;}
   .featured-track span:nth-child(even){color:#f5c36d;-webkit-text-stroke:0;text-stroke:0;}
   @media (prefers-reduced-motion:reduce){.featured-track,.terminal-input-row::after{animation:none;}}
+#about{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:60px;
+    align-items:start;
+}
+
+.about-content{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+@media (max-width:860px){
+    #about{
+        grid-template-columns:1fr;
+    }
+
+    .about-content{
+        gap:12px;
+    }
+
+    .fun-facts-card{
+        margin-top:24px;
+    }
+}
 
 </style>
 </head>
@@ -628,21 +654,120 @@ body{
         </div>
   </section>
 
-  <section id="about">
-    <div class="about-num mono reveal">01 — about</div>
-    <div class="about-body reveal">
-      <div class="eyebrow">WHO is this</div>
-      <h2 class="section-title">Half classroom, half codebase.</h2>
-      <p>Sheila is a sophomore at <strong>Seven Lakes High School</strong> who started coding young, and decided the most useful thing she could do with it was hand it to someone younger. In July 2024 she launched <strong>SSC (Sheila's Coding Course)</strong>, a self-run program for students aged 7–11 that starts in Scratch and works up through HTML, CSS, and JavaScript, with lessons rebuilt around however each kid actually learns.</p>
-      <p>She's since taken that same energy to <strong>TheCoderSchool</strong> as a Code Coach. Outside the (real and virtual) classroom, she's active in Girls Who Code, NHS, CSHS, the Technology Student Association, and the Tech Entrepreneurship Club. </p>
-      <div class="about-stats">
-        <div class="stat-card"><div class="num" data-count="15">0</div><div class="lbl">Years Old</div></div>
-        <div class="stat-card"><div class="num" data-count="30" data-suffix="+">0</div><div class="lbl">Students Mentored</div></div>
-        <div class="stat-card"><div class="num" data-count="2">0</div><div class="lbl">National Awards</div></div>
-        <div class="stat-card"><div class="num" data-count="3">0</div><div class="lbl">Projects</div></div>
-      </div>
+ <section id="about">
+
+    <div class="about-content">
+
+        <div class="about-num mono reveal">01 — about</div>
+
+        <div class="about-body reveal">
+            <div class="eyebrow">WHO is this</div>
+
+            <h2 class="section-title">Half classroom, half codebase.</h2>
+
+            <p>
+                Sheila is a sophomore at <strong>Seven Lakes High School</strong> who
+                started coding young, and decided the most useful thing she could do
+                with it was hand it to someone younger. In July 2024 she launched
+                <strong>SSC (Sheila's Coding Course)</strong>, a self-run program for
+                students aged 7–11 that starts in Scratch and works up through HTML,
+                CSS, and JavaScript, with lessons rebuilt around however each kid
+                actually learns.
+            </p>
+
+            <p>
+                She's since taken that same energy to
+                <strong>TheCoderSchool</strong> as a Code Coach. Outside the (real and
+                virtual) classroom, she's active in Girls Who Code, NHS, CSHS, the
+                Technology Student Association, and the Tech Entrepreneurship Club.
+            </p>
+
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="num" data-count="15">0</div>
+                    <div class="lbl">Years Old</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="num" data-count="30" data-suffix="+">0</div>
+                    <div class="lbl">Students Mentored</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="num" data-count="2">0</div>
+                    <div class="lbl">National Awards</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="num" data-count="3">0</div>
+                    <div class="lbl">Projects</div>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </section>
+
+    <div class="fun-facts-card reveal">
+    <div class="tilt-glare"></div>
+
+    <div class="log">
+
+        <div class="log-row">
+
+            <div class="log-msg">
+                <div class="t">Current Fuel</div>
+                <div class="m">Tiger Boba, Iced Vanilla Protein Latte, Vanilla Bean Creme Frappe</div>
+            </div>
+
+            <div class="log-year">24/7</div>
+        </div>
+
+        <div class="log-row">
+
+            <div class="log-msg">
+                <div class="t">Outside Coding</div>
+                <div class="m">Bass guitar, Skateboarding, Reading DC Comics</div>
+            </div>
+
+            <div class="log-year">♪</div>
+        </div>
+
+        <div class="log-row">
+
+            <div class="log-msg">
+                <div class="t">What I like to Make</div>
+                <div class="m">AI tools that improve education</div>
+            </div>
+
+            <div class="log-year">∞</div>
+        </div>
+
+        <div class="log-row">
+
+            <div class="log-msg">
+                <div class="t">Time Zone</div>
+                <div class="m">Central Standard Time (CST)</div>
+            </div>
+
+            <div class="log-year">2AM</div>
+        </div>
+        <div class="log-row">
+
+            <div class="log-msg">
+                <div class="t">Experience</div>
+                <div class="m">7+ Years in Software Dev</div>
+            </div>
+
+            <div class="log-year">2026</div>
+        </div>
+      
+        </div>
+     
+</div>
+
+    </div>
+
+</section>
 
   <section id="journey">
     <div class="eyebrow reveal">02 — the curriculum</div>
@@ -717,7 +842,7 @@ body{
 
   <div class="featured-marquee" aria-label="Featured works marquee">
     <div class="featured-track" aria-hidden="true">
-      <span>Featured Works</span><span>Project Lab</span><span>Featured Works</span><span>Project Lab</span>
+      <span>Featured Works</span><span>Projects</span><span>Featured Works</span><span>Projects</span>
     </div>
   </div>
 
