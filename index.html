@@ -96,8 +96,6 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
   grid-template-rows:auto 1fr auto;overflow:hidden}
 .hero__meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;border-top:1px solid var(--line);padding-top:10px}
 .hero__meta div{display:flex;flex-direction:column;gap:2px}
-.hero__meta .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:1px;animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.25}}
 .hero__name{position:relative;margin:0;font-family:var(--f-display);font-weight:200;font-variation-settings:"wdth" 62;
   font-size:clamp(96px,24.5vw,440px);line-height:.8;letter-spacing:-.045em;align-self:center;display:grid;padding-block:3vh}
 .hero__name .ln{display:block;overflow:hidden;padding-bottom:.04em}
@@ -194,6 +192,18 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 .row p{margin:0;max-width:52ch}
 .row strong{font-weight:600}
 
+/* awards */
+.awards__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6vw;margin-top:10vh;align-items:start}
+.award{display:flex;flex-direction:column;gap:20px;min-width:0}
+.award--low{margin-top:18vh}
+.award__fig{margin:0;display:flex;flex-direction:column;gap:10px}
+.award__img{position:relative;aspect-ratio:4/3;background:var(--plate);overflow:hidden}
+.award__img canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.award__fig figcaption{display:flex;justify-content:space-between;gap:12px}
+.award__title{margin:0;font-family:var(--f-display);font-weight:250;font-variation-settings:"wdth" 62;font-size:clamp(52px,6.4vw,120px);line-height:.85;letter-spacing:-.045em}
+.award__title em{font-weight:300}
+.awards__more{margin-top:14vh}
+
 /* about */
 .about__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;margin-top:8vh;align-items:start}
 .about__bio{grid-column:1/6;grid-row:1;font-size:clamp(19px,1.7vw,25px);line-height:1.4;letter-spacing:-.012em;margin:0;text-wrap:pretty}
@@ -235,6 +245,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 /* ============ RESPONSIVE ============ */
 @media (max-width:900px){
   .chrome--top{grid-template-columns:1fr auto}
+  .chrome--bot{display:none}
   .nav{display:none}
   .tools{gap:14px}
   .tool .lbl{display:none}
@@ -248,40 +259,52 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
   .hero__foot .cue,.hero__foot .fig{justify-self:start;text-align:left}
   .hero__foot .cue{display:none}
 
-  .work__pin{position:relative;height:auto}
-  .work__head{padding-top:14vh}
-  .work__track{overflow-x:auto;scroll-snap-type:x mandatory;gap:5vw;padding-bottom:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;transform:none!important}
-  .work__track::-webkit-scrollbar{display:none}
-  .panel,.panel--flip{width:84vw;grid-template-columns:minmax(0,1fr);scroll-snap-align:center;align-content:start;padding-block:3vh 2vh}
-  .panel--intro{width:70vw}
+  /* projects stack vertically on phones instead of scrolling sideways */
+  .work__pin{position:relative;height:auto;overflow:visible}
+  .work__head{padding-top:12vh}
+  .work__ctrl,.work__bar{display:none}
+  .work__track{flex-direction:column;gap:10vh;transform:none!important;padding-top:4vh}
+  .panel,.panel--flip{width:100%;grid-template-columns:minmax(0,1fr);align-content:start;padding-block:0;gap:18px}
+  .panel--intro{width:100%;padding-right:0;gap:20px}
   .panel--intro h2{font-size:24vw}
   .panel--flip .panel__fig{order:0}
   .panel__fig,.panel--low .panel__fig,.panel--high .panel__fig{height:auto;max-height:none;align-self:auto}
-  .panel__img{flex:none;aspect-ratio:4/5;max-width:100%}
+  .panel__img{flex:none;aspect-ratio:4/3;max-width:100%}
+  .panel__img canvas{translate:none!important;left:0;width:100%}
   .panel__text,.panel--flip .panel__text{padding:0;margin-top:0;gap:18px}
-  .panel__title,.panel--flip .panel__title{margin:-.5em 0 0;font-size:17vw;order:-1}
+  .panel__title,.panel--flip .panel__title{margin:0;font-size:17vw;order:-1;color:var(--ink);mix-blend-mode:normal}
   .panel__desc{font-size:15px}
+  .specs{gap:6px 16px}
 
-  .sec{padding-top:16vh}
+  .sec{padding-top:12vh;padding-bottom:8vh}
+  .sec__label{margin-bottom:6vh;gap:12px}
+  .huge,.contact .huge{font-size:19vw;white-space:normal;transform:none!important;margin-left:0}
+
+  .awards__grid{grid-template-columns:minmax(0,1fr);gap:10vh;margin-top:6vh}
+  .award--low{margin-top:0}
+  .award__title{font-size:15vw}
+  .awards__more{margin-top:10vh}
   .record{grid-template-columns:minmax(0,1fr);gap:40px}
   .record__side{position:static}
   .row{grid-template-columns:minmax(0,1fr);gap:6px}
   .row:hover{padding-left:0}
 
-  .about__grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .about__grid{grid-template-columns:minmax(0,1fr);gap:28px;margin-top:6vh}
   .about__bio,.about__bio+.about__bio,.portrait,.meta,.meta--a,.meta--b,.meta--c,.meta--d,.meta--e{grid-column:1;grid-row:auto;margin:0}
-  .portrait{margin:0 0 0 12vw}
-  .meta--c{margin-left:24vw}
-  .meta--e{margin-left:12vw}
+  .portrait{margin:0}
 
-  .contact__body{grid-template-columns:minmax(0,1fr)}
-  .foot{grid-template-columns:1fr 1fr}
+  .contact__body{grid-template-columns:minmax(0,1fr);margin-top:6vh;gap:40px}
+  .mail{font-size:clamp(26px,8vw,48px)}
+  .foot{grid-template-columns:1fr 1fr;margin-top:10vh}
   .foot div:last-child{text-align:left}
 }
 @media (max-width:520px){
   .brand span{display:none}
   .hero__meta .hide-s{display:none}
   .scrollbar__track{width:50px}
+  .hero__meta{font-size:10px}
+  .foot{grid-template-columns:minmax(0,1fr);gap:10px}
+  .socials b{font-size:20px}
 }
 </style>
 
@@ -295,10 +318,11 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 <header class="chrome chrome--top">
   <a class="brand" href="#index">Sheila Sil<span>S—S / 2026</span></a>
   <nav class="nav mono" aria-label="Sections">
-    <a href="#work" data-nav="work"><sup>02</sup>Work</a>
-    <a href="#record" data-nav="record"><sup>03</sup>Record</a>
-    <a href="#about" data-nav="about"><sup>04</sup>About</a>
-    <a href="#contact" data-nav="contact"><sup>05</sup>Contact</a>
+    <a href="#work" data-nav="work"><sup>02</sup>Projects</a>
+    <a href="#awards" data-nav="awards"><sup>03</sup>Awards</a>
+    <a href="#record" data-nav="record"><sup>04</sup>Record</a>
+    <a href="#about" data-nav="about"><sup>05</sup>About</a>
+    <a href="#contact" data-nav="contact"><sup>06</sup>Contact</a>
   </nav>
   <div class="tools mono">
     <button class="tool" id="sound" aria-pressed="false" title="Ambient sound"><span class="eq" aria-hidden="true"><b></b><b></b><b></b></span><span class="lbl" id="soundLbl">Sound off</span></button>
@@ -307,7 +331,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 </header>
 
 <div class="chrome chrome--bot mono" aria-hidden="true">
-  <div class="pg"><span class="pg__n" id="pgN">01</span><span>/ 05 &nbsp;<span id="pgName">Index</span></span></div>
+  <div class="pg"><span class="pg__n" id="pgN">01</span><span>/ 06 &nbsp;<span id="pgName">Index</span></span></div>
   <div class="scrollbar"><span id="pct">000%</span><span class="scrollbar__track"><span class="scrollbar__fill" id="pctFill"></span></span></div>
 </div>
 
@@ -315,7 +339,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 <!-- ================= HERO ================= -->
 <section class="hero" id="index" data-sec="Index">
   <div class="hero__meta mono">
-    <div><span class="mute">Status</span><span><i class="dot"></i>Building LaunchOS</span></div>
+    <div><span class="mute">Status</span><span>Building LaunchOS</span></div>
     <div><span class="mute">Based in</span><span>Katy, Texas</span></div>
     <div class="hide-s"><span class="mute">Coordinates</span><span>29.7858° N, 95.8245° W</span></div>
     <div><span class="mute">Local time</span><span id="clock">—</span></div>
@@ -341,21 +365,21 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 </section>
 
 <!-- ================= WORK ================= -->
-<section class="work" id="work" data-sec="Work">
+<section class="work" id="work" data-sec="Projects">
   <div class="work__pin" id="pin">
     <div class="work__head">
-      <span class="mono">Selected work, 2021 — 2026</span>
+      <span class="mono">Projects, 2024 — 2026</span>
       <div class="work__ctrl">
         <button class="arrow arrow--prev" id="wPrev" aria-label="Previous project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M15 8H1m6-6L1 8l6 6" fill="none" stroke="currentColor"/></svg></button>
-        <span class="work__count" id="wCount">00<small>/05</small></span>
+        <span class="work__count" id="wCount">00<small>/02</small></span>
         <button class="arrow" id="wNext" aria-label="Next project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h14M9 2l6 6-6 6" fill="none" stroke="currentColor"/></svg></button>
       </div>
     </div>
     <div class="work__bar"><i id="wBar"></i></div>
     <div class="work__track" id="track">
       <div class="panel panel--intro">
-        <h2>Selected<br><em>work</em><sup>(05)</sup></h2>
-        <p>Five things I've made or earned, from a platform with a thousand users to a bouncing ball. Scroll sideways, or use the arrows.</p>
+        <h2>Selected<br><em>projects</em><sup>(02)</sup></h2>
+        <p>Two things I've built and run: a platform with a thousand users and a coding program for younger students.</p>
       </div>
 
       <article class="panel panel--high" data-i="1">
@@ -364,7 +388,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
           <figcaption class="mono mute"><span>Every node is a task; every edge a dependency.</span><span>Live</span></figcaption>
         </figure>
         <div class="panel__text">
-          <span class="panel__idx mono">01 / 05</span>
+          <span class="panel__idx mono">01 / 02</span>
           <h3 class="panel__title">Launch<em>OS</em></h3>
           <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Type</dt><dd>AI product platform</dd><dt>Role</dt><dd>Founder, developer</dd><dt>Stack</dt><dd>React, Vite, Tailwind, Three.js, Base44, InvokeLLM</dd></dl>
           <p class="panel__desc">An AI-powered workspace for planning, organizing and building software projects. It turns a rough idea into tasks, workflows and next steps. More than 1,000 people signed up after it launched in June 2026.</p>
@@ -378,77 +402,63 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
           <figcaption class="mono mute"><span>JavaScript and Java, carried across.</span><span>30+ students</span></figcaption>
         </figure>
         <div class="panel__text">
-          <span class="panel__idx mono">02 / 05</span>
+          <span class="panel__idx mono">02 / 02</span>
           <h3 class="panel__title">Byte<em>Bridge</em></h3>
           <dl class="specs mono"><dt>Year</dt><dd>2024 — now</dd><dt>Type</dt><dd>Teaching, curriculum</dd><dt>Role</dt><dd>Founder, instructor</dd></dl>
           <p class="panel__desc">A coding program I founded and run on my own. I write project-based lessons in JavaScript and Java for more than 30 students, adjusted to each one's level. Every student scored a 4 or 5 on the AP CSA or AP CSP exam.</p>
-        </div>
-      </article>
-
-      <article class="panel panel--high" data-i="3">
-        <figure class="panel__fig">
-          <div class="panel__img"><span class="panel__corner mono">Fig. 03 — Flow past a body</span><canvas data-gen="flow"></canvas></div>
-          <figcaption class="mono mute"><span>Streamlines, left to right.</span><span>CAD / aero</span></figcaption>
-        </figure>
-        <div class="panel__text">
-          <span class="panel__idx mono">03 / 05</span>
-          <h3 class="panel__title">STEM <em>Racing</em></h3>
-          <dl class="specs mono"><dt>Year</dt><dd>Ongoing</dd><dt>Type</dt><dd>Engineering, CAD, aerodynamics</dd><dt>Role</dt><dd>Founder, president</dd></dl>
-          <p class="panel__desc">A student team at Seven Lakes High School that designs, models and races small cars for STEM Racing and F1 in Schools. We work on the whole car: CAD, aerodynamics and motorsport design.</p>
-        </div>
-      </article>
-
-      <article class="panel panel--flip panel--high" data-i="4">
-        <figure class="panel__fig">
-          <div class="panel__img"><span class="panel__corner mono">Fig. 04 — Planet, ordered dither</span><canvas data-gen="planet"></canvas></div>
-          <figcaption class="mono mute"><span>Rendered in a 4 × 4 Bayer matrix.</span><span>Dallas</span></figcaption>
-        </figure>
-        <div class="panel__text">
-          <span class="panel__idx mono">04 / 05</span>
-          <h3 class="panel__title">Space <em>Apps</em></h3>
-          <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Type</dt><dd>Hackathon</dd><dt>Award</dt><dd>Best Use of Art &amp; Technology</dd></dl>
-          <p class="panel__desc">NASA's International Space Apps Challenge, Dallas location. Our team won the local award for Best Use of Art &amp; Technology.</p>
-        </div>
-      </article>
-
-      <article class="panel panel--low" data-i="5">
-        <figure class="panel__fig">
-          <div class="panel__img"><span class="panel__corner mono">Fig. 05 — Onion skin, 13 frames</span><canvas data-gen="bounce"></canvas></div>
-          <figcaption class="mono mute"><span>Squash, stretch, repeat.</span><span>22nd globally</span></figcaption>
-        </figure>
-        <div class="panel__text">
-          <span class="panel__idx mono">05 / 05</span>
-          <h3 class="panel__title">Out&shy;standing <em>Animation</em></h3>
-          <dl class="specs mono"><dt>Year</dt><dd>2021</dd><dt>Type</dt><dd>Animation</dd><dt>Award</dt><dd>IKCC, 22nd globally</dd></dl>
-          <p class="panel__desc">The International Kids' Coding Competition gave my entry its Outstanding Animation Award. It placed 22nd in the world. It was the first thing I made that moved.</p>
         </div>
       </article>
     </div>
   </div>
 </section>
 
+<!-- ================= AWARDS ================= -->
+<section class="sec awards" id="awards" data-sec="Awards">
+  <div class="sec__label mono"><span>03 — Awards</span><span>2021 — 2026</span></div>
+  <h2 class="huge" data-drift="-0.06">Awards <em>won.</em></h2>
+  <div class="awards__grid">
+    <article class="award" id="aw-space">
+      <figure class="award__fig">
+        <div class="award__img"><span class="panel__corner mono">Fig. 03 — Planet, ordered dither</span><canvas data-gen="planet"></canvas></div>
+        <figcaption class="mono mute"><span>Rendered in a 4 × 4 Bayer matrix.</span><span>Dallas</span></figcaption>
+      </figure>
+      <span class="panel__idx mono">01 / 04</span>
+      <h3 class="award__title">Space <em>Apps</em></h3>
+      <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Event</dt><dd>NASA Space Apps Challenge</dd><dt>Award</dt><dd>Best Use of Art &amp; Technology</dd></dl>
+      <p class="panel__desc">NASA's International Space Apps Challenge, Dallas location. Our team won the local award for Best Use of Art &amp; Technology.</p>
+    </article>
+    <article class="award award--low" id="aw-anim">
+      <figure class="award__fig">
+        <div class="award__img"><span class="panel__corner mono">Fig. 04 — Onion skin, 13 frames</span><canvas data-gen="bounce"></canvas></div>
+        <figcaption class="mono mute"><span>Squash, stretch, repeat.</span><span>22nd globally</span></figcaption>
+      </figure>
+      <span class="panel__idx mono">02 / 04</span>
+      <h3 class="award__title">Out&shy;standing <em>Animation</em></h3>
+      <dl class="specs mono"><dt>Year</dt><dd>2021</dd><dt>Event</dt><dd>Int'l Kids' Coding Competition</dd><dt>Award</dt><dd>Outstanding Animation, 22nd globally</dd></dl>
+      <p class="panel__desc">The International Kids' Coding Competition gave my entry its Outstanding Animation Award. It placed 22nd in the world. It was the first thing I made that moved.</p>
+    </article>
+  </div>
+  <div class="block awards__more">
+    <div class="block__h mono"><span>Also</span><span>02</span></div>
+    <div class="row"><span class="yr">2026</span><h3>TSA Webmaster<small>Regionals</small></h3><p>Placed 8th.</p></div>
+    <div class="row"><span class="yr">2025</span><h3>TSA Coding<small>Regionals, States</small></h3><p>2nd at Regionals, 11th at States.</p></div>
+  </div>
+</section>
+
 <!-- ================= RECORD ================= -->
 <section class="sec" id="record" data-sec="Record">
-  <div class="sec__label mono"><span>03 — Record</span><span>Katy, TX · 2021 — 2026</span></div>
+  <div class="sec__label mono"><span>04 — Record</span><span>Katy, TX · 2021 — 2026</span></div>
   <div class="record">
     <aside class="record__side">
       <h2>The<br><em>record.</em></h2>
-      <p>Work, awards and study, newest first.</p>
+      <p>Work and study, newest first.</p>
     </aside>
     <div>
       <div class="block">
-        <div class="block__h mono"><span>Work</span><span>04</span></div>
+        <div class="block__h mono"><span>Work</span><span>03</span></div>
         <div class="row"><span class="yr">2026 —</span><h3>Code Coach<small>TheCoderSchool</small></h3><p>Mentor students ages 7 to 10 in programming, game development and computational thinking through one-on-one projects and debugging challenges.</p></div>
         <div class="row"><span class="yr">2025 —</span><h3>Founder, developer<small>LaunchOS</small></h3><p>Designed and built an AI project planning platform. <strong>1,000+ signups</strong> since June 2026.</p></div>
         <div class="row"><span class="yr">2024 —</span><h3>Founder, instructor<small>ByteBridge</small></h3><p>Run a coding program for <strong>30+ students</strong> in JavaScript and Java. 100% scored 4 or above on AP CSA / AP CSP.</p></div>
-        <div class="row"><span class="yr">Ongoing</span><h3>Founder, president<small>STEM Racing Club</small></h3><p>Lead a student team working on engineering, CAD, aerodynamics and motorsport design for STEM Racing and F1 in Schools.</p></div>
-      </div>
-      <div class="block">
-        <div class="block__h mono"><span>Awards</span><span>05</span></div>
-        <div class="row"><span class="yr">2026</span><h3>TSA Webmaster<small>Regionals</small></h3><p>Placed 8th.</p></div>
-        <div class="row"><span class="yr">2025</span><h3>TSA Coding<small>Regionals, States</small></h3><p>2nd at Regionals, 11th at States.</p></div>
-        <div class="row"><span class="yr">2025</span><h3>NASA Space Apps Challenge<small>Dallas</small></h3><p>Best Use of Art &amp; Technology.</p></div>
-        <div class="row"><span class="yr">2021</span><h3>IKCC Outstanding Animation<small>International Kids' Coding Competition</small></h3><p>Placed <strong>22nd globally</strong>.</p></div>
       </div>
       <div class="block">
         <div class="block__h mono"><span>Study</span><span>03</span></div>
@@ -462,10 +472,10 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 
 <!-- ================= ABOUT ================= -->
 <section class="sec" id="about" data-sec="About">
-  <div class="sec__label mono"><span>04 — About</span><span>Portrait, notes, particulars</span></div>
+  <div class="sec__label mono"><span>05 — About</span><span>Portrait, notes, particulars</span></div>
   <h2 class="huge" data-drift="-0.08">About <em>me.</em></h2>
   <div class="about__grid">
-    <p class="about__bio">I'm Sheila, a student at Seven Lakes High School in Katy, Texas. I write software, teach younger kids to write it too, and lead a team that builds tiny race cars.</p>
+    <p class="about__bio">I'm Sheila, a student at Seven Lakes High School in Katy, Texas. I write software and teach younger kids to write it too.</p>
     <p class="about__bio">Most of what I make starts with a question: how would this feel to use? LaunchOS came from wanting a calmer way to plan a project. ByteBridge came from watching friends get stuck on the same bug I once had. When I'm not coding I'm playing bass, producing R&amp;B, skateboarding, or telling a joke that is almost certainly too cheesy.</p>
     <figure class="portrait" data-cursor="pluck">
       <div class="portrait__img"><canvas id="strings" aria-label="Four bass strings vibrating. Hover or tap to pluck."></canvas></div>
@@ -481,7 +491,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 
 <!-- ================= CONTACT ================= -->
 <section class="sec contact" id="contact" data-sec="Contact">
-  <div class="sec__label mono"><span>05 — Contact</span><span>Replies within a few days</span></div>
+  <div class="sec__label mono"><span>06 — Contact</span><span>Replies within a few days</span></div>
   <h2 class="huge" data-drift="0.06">contact <em>me.</em></h2>
   <div class="contact__body">
     <div class="mail-row">
@@ -492,7 +502,6 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
     <ul class="socials">
       <li><a href="https://www.linkedin.com/in/sheila-sil-968b07310/" target="_blank" rel="noopener"><span class="mono mute">01</span><b>LinkedIn</b><span class="mono">↗</span></a></li>
       <li><a href="https://github.com/Sheila-Sil" target="_blank" rel="noopener"><span class="mono mute">02</span><b>GitHub</b><span class="mono">↗</span></a></li>
-      <li><a href="https://launch-os.base44.app" target="_blank" rel="noopener"><span class="mono mute">03</span><b>LaunchOS</b><span class="mono">↗</span></a></li>
     </ul>
   </div>
   <footer class="foot mono">
@@ -649,42 +658,6 @@ function genBridge() {
   };
 }
 
-function genFlow() {
-  const Rc = .55, lines = [];
-  for (let k = 0; k < 34; k++) {
-    const Y0 = -1.7 + 3.4 * k / 33; if (Math.abs(Y0) < .05) continue;
-    let X = -3.3, Y = Y0; const pts = [[X, Y]];
-    for (let s = 0; s < 1400 && X < 3.3; s++) {
-      const r2 = X * X + Y * Y, r4 = r2 * r2;
-      let u = 1 - Rc * Rc * (X * X - Y * Y) / r4, v = -2 * Rc * Rc * X * Y / r4;
-      const m = Math.hypot(u, v) || 1; X += u / m * .02; Y += v / m * .02; pts.push([X, Y]);
-    }
-    lines.push(pts);
-  }
-  return (x, w, h, t, p) => {
-    x.fillStyle = p.bg; x.fillRect(0, 0, w, h);
-    const u = Math.min(w, h) / 600, cx = w / 2, cy = h * .5, sx = w / 6.2, sy = h * .27;
-    const map = (q) => [cx + q[0] * sx, cy + q[1] * sy];
-    x.lineWidth = .8 * u;
-    for (const L of lines) {
-      x.beginPath(); L.forEach((q, i) => { const [a, b] = map(q); i ? x.lineTo(a, b) : x.moveTo(a, b); });
-      x.strokeStyle = alpha(p.fg, .18); x.setLineDash([]); x.stroke();
-      x.strokeStyle = p.fg; x.setLineDash([16 * u, 70 * u]); x.lineDashOffset = -t * 70 * u; x.stroke();
-    }
-    x.setLineDash([]);
-    // car body (ellipse + wing + wheels)
-    const bw = Rc * sx, bh = Rc * sy;
-    x.fillStyle = p.fg; x.beginPath(); x.ellipse(cx, cy, bw, bh * .82, 0, 0, 7); x.fill();
-    x.fillRect(cx + bw * .72, cy - bh * 1.25, bw * .32, 4 * u);
-    x.fillRect(cx + bw * .84, cy - bh * 1.25, 3 * u, bh * .6);
-    x.fillStyle = p.bg; x.strokeStyle = p.fg; x.lineWidth = 2 * u;
-    for (const f of [-.55, .55]) { x.beginPath(); x.arc(cx + bw * f, cy + bh * .62, bh * .42, 0, 7); x.fill(); x.stroke(); }
-    x.fillStyle = p.acc; x.fillRect(cx - bw * .2, cy - bh * .15, bw * .35, 3 * u);
-    x.fillStyle = p.fg; x.font = `${10 * u}px ${MONO}`; x.textBaseline = 'middle';
-    x.fillText('U∞ →', 18 * u, cy); x.fillText('WAKE', w - 60 * u, cy + bh * 1.8);
-  };
-}
-
 function genPlanet() {
   const B = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
   const off = document.createElement('canvas'), ox = off.getContext('2d');
@@ -801,7 +774,7 @@ function genStrings() {
   return draw;
 }
 
-const GENS = { launch: genLaunch, bridge: genBridge, flow: genFlow, planet: genPlanet, bounce: genBounce };
+const GENS = { launch: genLaunch, bridge: genBridge, planet: genPlanet, bounce: genBounce };
 
 /* ---------- plate runner ---------- */
 const plates = [];
@@ -828,9 +801,8 @@ const CH = [
   { t: 'Boot' },
   { t: 'LaunchOS', y: '2025', c: 'AI PRODUCT', g: 'launch', i: 1 },
   { t: 'ByteBridge', y: '2024—', c: 'TEACHING', g: 'bridge', i: 2 },
-  { t: 'STEM Racing', y: 'NOW', c: 'ENGINEERING', g: 'flow', i: 3 },
-  { t: 'Space Apps', y: '2025', c: 'HACKATHON', g: 'planet', i: 4 },
-  { t: 'Animation', y: '2021', c: 'ANIMATION', g: 'bounce', i: 5 }
+  { t: 'Space Apps', y: '2025', c: 'AWARD', g: 'planet', el: 'aw-space' },
+  { t: 'Animation', y: '2021', c: 'AWARD', g: 'bounce', el: 'aw-anim' }
 ];
 CH.forEach(c => { if (c.g) c.draw = GENS[c.g](); });
 const SCR = document.createElement('canvas'); SCR.width = 960; SCR.height = 544;
@@ -844,7 +816,12 @@ function setCh(n) {
 }
 SS.channel = (d) => setCh(ch + d);
 SS.home = () => setCh(0);
-SS.open = () => { if (ch === 0) setCh(1); else Work.goTo(CH[ch].i); };
+SS.open = () => {
+  const c = CH[ch];
+  if (ch === 0) setCh(1);
+  else if (c.i) Work.goTo(c.i);
+  else document.getElementById(c.el).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+};
 document.getElementById('chPrev').onclick = () => SS.channel(-1);
 document.getElementById('chNext').onclick = () => SS.channel(1);
 
@@ -907,25 +884,16 @@ const Work = (() => {
   function panelX(p) { return clamp(p.offsetLeft - (vw() - p.offsetWidth) / 2, 0, maxX); }
   function goTo(i) {
     i = clamp(i, 0, panels.length);
-    if (mobileQ.matches) {
-      if (!i) { track.scrollTo({ left: 0, behavior: 'smooth' }); } else { const p = panels[i - 1]; track.scrollTo({ left: p.offsetLeft - (track.clientWidth - p.offsetWidth) / 2, behavior: 'smooth' }); }
-      sec.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return;
-    }
+    if (mobileQ.matches) { (i ? panels[i - 1] : sec).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
     const x = i ? panelX(panels[i - 1]) : 0;
     scrollTo({ top: secTop + (maxX ? x / maxX : 0) * (secH - vh()) + 1, behavior: reduce ? 'auto' : 'smooth' });
   }
   function setIdx(i) {
     if (i === idx) return; idx = i;
-    count.innerHTML = String(i).padStart(2, '0') + '<small>/05</small>';
+    count.innerHTML = String(i).padStart(2, '0') + '<small>/' + String(panels.length).padStart(2, '0') + '</small>';
   }
   function tick() {
-    if (mobileQ.matches) {
-      const sl = track.scrollLeft, mx = track.scrollWidth - track.clientWidth;
-      bar.style.transform = `scaleX(${mx ? sl / mx : 0})`;
-      let best = 0, bd = 1e9; panels.forEach((p, k) => { const d = Math.abs(p.offsetLeft - sl - (track.clientWidth - p.offsetWidth) / 2); if (d < bd) { bd = d; best = k + 1; } });
-      setIdx(sl < panels[0].offsetLeft * .5 ? 0 : best);
-      return;
-    }
+    if (mobileQ.matches) return;
     const prog = clamp((scrollY - secTop) / Math.max(1, secH - vh()), 0, 1), target = prog * maxX;
     cur = reduce ? target : lerp(cur, target, .085);
     if (Math.abs(cur - target) < .1) cur = target;
@@ -979,7 +947,7 @@ function chromeTick() {
     lastSec = s; pgN.textContent = String(s + 1).padStart(2, '0'); pgName.textContent = secs[s].dataset.sec;
     navA.forEach(a => a.classList.toggle('is-on', a.dataset.nav === secs[s].id));
   }
-  if (!reduce) drifts.forEach(el => {
+  if (!reduce && !mobileQ.matches) drifts.forEach(el => {
     const r = el.getBoundingClientRect(); const c = (r.top + r.height / 2 - innerHeight / 2);
     el.style.transform = `translate3d(${c * parseFloat(el.dataset.drift)}px,0,0)`;
   });
