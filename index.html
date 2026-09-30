@@ -202,7 +202,34 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
 .award__fig figcaption{display:flex;justify-content:space-between;gap:12px}
 .award__title{margin:0;font-family:var(--f-display);font-weight:250;font-variation-settings:"wdth" 62;font-size:clamp(52px,6.4vw,120px);line-height:.85;letter-spacing:-.045em}
 .award__title em{font-weight:300}
-.awards__more{margin-top:14vh}
+.ledger{margin-top:14vh}
+.aw{border-bottom:1px solid var(--line)}
+.aw__row{width:100%;display:grid;grid-template-columns:110px minmax(0,1fr) auto 18px;gap:24px;align-items:center;padding:22px 0;text-align:left;position:relative;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:padding .7s var(--ease),transform .35s var(--ease)}
+.aw__row::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .9s var(--ease);
+  background:radial-gradient(circle at var(--px,50%) 50%,var(--ink),transparent 55%)}
+.aw__row.is-press::before{opacity:.07;transition:none}
+.aw__row:hover{padding-left:14px}
+.aw__row:active{transform:scale(.992) translateY(1px)}
+.aw__y{font-size:12px;font-variant-numeric:tabular-nums;color:var(--mute);letter-spacing:.02em}
+.aw__t b{display:block;font-family:var(--f-display);font-variation-settings:"wdth" 80;font-weight:500;font-size:clamp(20px,1.9vw,28px);letter-spacing:-.02em;line-height:1.1}
+.aw__t small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.aw__r{display:flex;align-items:flex-start;gap:4px;font-family:var(--f-display);font-variation-settings:"wdth" 62;font-weight:250;font-size:clamp(44px,5vw,84px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums;transition:color .6s var(--ease)}
+.aw__r sup{font-size:11px;letter-spacing:.06em;margin-top:.2em}
+.aw__n--word{font-style:italic;font-size:.62em;letter-spacing:-.02em}
+.aw.is-open .aw__r{color:var(--accent)}
+.aw__x{position:relative;width:14px;height:14px;justify-self:end;transition:transform .8s var(--ease)}
+.aw__x::before,.aw__x::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor}
+.aw__x::after{transform:rotate(90deg)}
+.aw.is-open .aw__x{transform:rotate(135deg)}
+.aw__b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .9s var(--ease)}
+.aw.is-open .aw__b{grid-template-rows:1fr}
+.aw__in{overflow:hidden;min-height:0}
+.aw__grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:end;padding:2px 0 28px 134px;opacity:0;transform:translateY(-10px);transition:opacity .6s,transform .9s var(--ease)}
+.aw.is-open .aw__grid{opacity:1;transform:none;transition-delay:.12s}
+.aw__plate{position:relative;aspect-ratio:16/7;background:var(--plate);overflow:hidden}
+.aw__plate canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (prefers-reduced-motion:reduce){.aw__b,.aw__grid,.aw__x,.aw__row{transition:none}}
 
 /* about */
 .about__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;margin-top:8vh;align-items:start}
@@ -283,7 +310,12 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
   .awards__grid{grid-template-columns:minmax(0,1fr);gap:10vh;margin-top:6vh}
   .award--low{margin-top:0}
   .award__title{font-size:15vw}
-  .awards__more{margin-top:10vh}
+  .ledger{margin-top:10vh}
+  .aw__row{grid-template-columns:44px minmax(0,1fr) auto 14px;gap:14px;padding:18px 0}
+  .aw__row:hover{padding-left:0}
+  .aw__r{font-size:48px}
+  .aw__grid{grid-template-columns:minmax(0,1fr);padding:0 0 24px;gap:16px}
+  .aw__plate{aspect-ratio:16/9}
   .record{grid-template-columns:minmax(0,1fr);gap:40px}
   .record__side{position:static}
   .row{grid-template-columns:minmax(0,1fr);gap:6px}
@@ -422,7 +454,7 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
         <div class="award__img"><span class="panel__corner mono">Fig. 03 — Planet, ordered dither</span><canvas data-gen="planet"></canvas></div>
         <figcaption class="mono mute"><span>Rendered in a 4 × 4 Bayer matrix.</span><span>Dallas</span></figcaption>
       </figure>
-      <span class="panel__idx mono">01 / 04</span>
+      <span class="panel__idx mono">01 / 06</span>
       <h3 class="award__title">Space <em>Apps</em></h3>
       <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Event</dt><dd>NASA Space Apps Challenge</dd><dt>Award</dt><dd>Best Use of Art &amp; Technology</dd></dl>
       <p class="panel__desc">NASA's International Space Apps Challenge, Dallas location. Our team won the local award for Best Use of Art &amp; Technology.</p>
@@ -432,16 +464,62 @@ body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;
         <div class="award__img"><span class="panel__corner mono">Fig. 04 — Onion skin, 13 frames</span><canvas data-gen="bounce"></canvas></div>
         <figcaption class="mono mute"><span>Squash, stretch, repeat.</span><span>22nd globally</span></figcaption>
       </figure>
-      <span class="panel__idx mono">02 / 04</span>
+      <span class="panel__idx mono">02 / 06</span>
       <h3 class="award__title">Out&shy;standing <em>Animation</em></h3>
       <dl class="specs mono"><dt>Year</dt><dd>2021</dd><dt>Event</dt><dd>Int'l Kids' Coding Competition</dd><dt>Award</dt><dd>Outstanding Animation, 22nd globally</dd></dl>
       <p class="panel__desc">The International Kids' Coding Competition gave my entry its Outstanding Animation Award. It placed 22nd in the world. It was the first thing I made that moved.</p>
     </article>
   </div>
-  <div class="block awards__more">
-    <div class="block__h mono"><span>Also</span><span>02</span></div>
-    <div class="row"><span class="yr">2026</span><h3>TSA Webmaster<small>Regionals</small></h3><p>Placed 8th.</p></div>
-    <div class="row"><span class="yr">2025</span><h3>TSA Coding<small>Regionals, States</small></h3><p>2nd at Regionals, 11th at States.</p></div>
+  <div class="block ledger" id="ledger">
+    <div class="block__h mono"><span>More awards — tap to open</span><span>04</span></div>
+    <div class="aw" data-pitch="110">
+      <button class="aw__row" aria-expanded="false" aria-controls="aw-b3">
+        <span class="aw__y mono">2026</span>
+        <span class="aw__t"><b>TSA Webmaster</b><small class="mono">Regionals</small></span>
+        <span class="aw__r"><span class="aw__n" data-rank="8">08</span><sup class="mono">th</sup></span>
+        <span class="aw__x" aria-hidden="true"></span>
+      </button>
+      <div class="aw__b" id="aw-b3" role="region"><div class="aw__in"><div class="aw__grid">
+        <div class="aw__plate"><canvas data-gen="rank" data-rank="8"></canvas></div>
+        <dl class="specs mono"><dt>Year</dt><dd>2026</dd><dt>Event</dt><dd>TSA Webmaster</dd><dt>Level</dt><dd>Regionals</dd><dt>Result</dt><dd>Placed 8th</dd></dl>
+      </div></div></div>
+    </div>
+    <div class="aw" data-pitch="98">
+      <button class="aw__row" aria-expanded="false" aria-controls="aw-b4">
+        <span class="aw__y mono">2025</span>
+        <span class="aw__t"><b>TSA Coding</b><small class="mono">States</small></span>
+        <span class="aw__r"><span class="aw__n" data-rank="11">11</span><sup class="mono">th</sup></span>
+        <span class="aw__x" aria-hidden="true"></span>
+      </button>
+      <div class="aw__b" id="aw-b4" role="region"><div class="aw__in"><div class="aw__grid">
+        <div class="aw__plate"><canvas data-gen="rank" data-rank="11"></canvas></div>
+        <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Event</dt><dd>TSA Coding</dd><dt>Level</dt><dd>States</dd><dt>Result</dt><dd>Placed 11th</dd></dl>
+      </div></div></div>
+    </div>
+    <div class="aw" data-pitch="82.41">
+      <button class="aw__row" aria-expanded="false" aria-controls="aw-b5">
+        <span class="aw__y mono">2025</span>
+        <span class="aw__t"><b>TSA Coding</b><small class="mono">Regionals</small></span>
+        <span class="aw__r"><span class="aw__n" data-rank="2">02</span><sup class="mono">nd</sup></span>
+        <span class="aw__x" aria-hidden="true"></span>
+      </button>
+      <div class="aw__b" id="aw-b5" role="region"><div class="aw__in"><div class="aw__grid">
+        <div class="aw__plate"><canvas data-gen="rank" data-rank="2"></canvas></div>
+        <dl class="specs mono"><dt>Year</dt><dd>2025</dd><dt>Event</dt><dd>TSA Coding</dd><dt>Level</dt><dd>Regionals</dd><dt>Result</dt><dd>Placed 2nd</dd></dl>
+      </div></div></div>
+    </div>
+    <div class="aw" data-pitch="73.42">
+      <button class="aw__row" aria-expanded="false" aria-controls="aw-b6">
+        <span class="aw__y mono">2021</span>
+        <span class="aw__t"><b>Black History Month Oratory Contest</b><small class="mono">Fort Bend County</small></span>
+        <span class="aw__r"><span class="aw__n aw__n--word">Finalist</span></span>
+        <span class="aw__x" aria-hidden="true"></span>
+      </button>
+      <div class="aw__b" id="aw-b6" role="region"><div class="aw__in"><div class="aw__grid">
+        <div class="aw__plate"><canvas data-gen="voice"></canvas></div>
+        <dl class="specs mono"><dt>Year</dt><dd>2021</dd><dt>Event</dt><dd>Oratory contest</dd><dt>Level</dt><dd>Fort Bend County</dd><dt>Result</dt><dd>Finalist</dd></dl>
+      </div></div></div>
+    </div>
   </div>
 </section>
 
@@ -737,6 +815,54 @@ function genBounce() {
   };
 }
 
+function genRank(d) {
+  const rank = +d.rank, N = Math.max(12, rank + 3);
+  const len = Array.from({ length: N }, (_, i) => .94 - i * (.62 / N) - ((i * 37) % 7) * .012);
+  return (x, w, h, t, p) => {
+    x.fillStyle = p.bg; x.fillRect(0, 0, w, h);
+    const u = Math.min(w, h) / 300, pad = 14 * u, top = 34 * u, rh = (h - top - pad) / N, L = pad + 26 * u, R = w - pad;
+    const e = reduce ? 9 : Math.max(0, t - (+d.t0 || 0));
+    x.font = `${Math.max(8, 8 * u)}px ${MONO}`; x.textBaseline = 'middle';
+    for (let i = 0; i < N; i++) {
+      const y = top + i * rh + rh / 2, me = i + 1 === rank;
+      const g = clamp((e - i * .05) / .9, 0, 1), k = 1 - Math.pow(1 - g, 4);
+      x.fillStyle = me ? p.acc : alpha(p.fg, .45); x.fillText(String(i + 1).padStart(2, '0'), pad, y);
+      const bw = (R - L) * len[i] * k;
+      if (me) { x.fillStyle = p.acc; x.fillRect(L, y - rh * .32, bw, rh * .64); }
+      else { x.fillStyle = alpha(p.fg, .16); x.fillRect(L, y - .5 * u, bw, Math.max(1, u)); }
+      if (me && g >= 1) {
+        const lbl = 'PLACED ' + String(rank).padStart(2, '0'), tw = x.measureText(lbl).width;
+        const inside = L + bw + 8 * u + tw > R;
+        x.fillStyle = inside ? p.bg : p.fg;
+        x.fillText(lbl, inside ? L + bw - tw - 8 * u : L + bw + 8 * u, y);
+      }
+    }
+    x.fillStyle = p.fg; x.fillText('STANDINGS', pad, 16 * u);
+  };
+}
+
+function genVoice(d) {
+  return (x, w, h, t, p) => {
+    x.fillStyle = p.bg; x.fillRect(0, 0, w, h);
+    const u = Math.min(w, h) / 300, mid = h * .55, amp = h * .3, pad = 14 * u;
+    x.strokeStyle = alpha(p.fg, .18); x.lineWidth = u;
+    x.beginPath(); x.moveTo(pad, mid); x.lineTo(w - pad, mid); x.stroke();
+    const env = (s) => { const q = s * .9 - t * .8; return Math.pow(Math.max(0, Math.sin(q * 2.1) * Math.sin(q * .53 + 1)), 1.4); };
+    for (const [c, a, lw] of [[alpha(p.fg, .3), .6, u], [p.fg, 1, 1.4 * u]]) {
+      x.strokeStyle = c; x.lineWidth = lw; x.beginPath();
+      for (let xx = pad; xx <= w - pad; xx += 1.5) {
+        const s = xx / w * 12, y = mid + env(s) * amp * a * (Math.sin(s * 23 + t * 9) * .7 + Math.sin(s * 57 - t * 13) * .3);
+        xx === pad ? x.moveTo(xx, y) : x.lineTo(xx, y);
+      }
+      x.stroke();
+    }
+    const cx = w - pad - 4 * u; x.fillStyle = (t * 1.4 | 0) % 2 ? p.acc : alpha(p.acc, .3);
+    x.beginPath(); x.arc(cx, 16 * u, 3.5 * u, 0, 7); x.fill();
+    x.fillStyle = p.fg; x.font = `${Math.max(8, 8 * u)}px ${MONO}`; x.textBaseline = 'middle';
+    x.fillText('LIVE · ORATORY · FINALIST', pad, 16 * u);
+  };
+}
+
 function genStrings() {
   const names = ['E', 'A', 'D', 'G'], freq = [41.2, 55, 73.42, 98];
   const st = names.map(() => ({ a: 0, t0: 0 }));
@@ -774,7 +900,7 @@ function genStrings() {
   return draw;
 }
 
-const GENS = { launch: genLaunch, bridge: genBridge, planet: genPlanet, bounce: genBounce };
+const GENS = { launch: genLaunch, bridge: genBridge, planet: genPlanet, bounce: genBounce, rank: genRank, voice: genVoice };
 
 /* ---------- plate runner ---------- */
 const plates = [];
@@ -790,7 +916,7 @@ function Plate(canvas, draw) {
   new IntersectionObserver(([e]) => { o.vis = e.isIntersecting; }, { rootMargin: '200px' }).observe(canvas);
   plates.push(o); return o;
 }
-document.querySelectorAll('canvas[data-gen]').forEach(c => Plate(c, GENS[c.dataset.gen]()));
+document.querySelectorAll('canvas[data-gen]').forEach(c => Plate(c, GENS[c.dataset.gen](c.dataset)));
 const stringsDraw = genStrings();
 const stringsPlate = Plate(document.getElementById('strings'), stringsDraw);
 
@@ -977,6 +1103,29 @@ let lastPl = 0;
 const pluckAt = (e) => { const r = sc.getBoundingClientRect(); const now = performance.now(); if (now - lastPl < 140) return; lastPl = now; stringsDraw.pluck((e.clientX - r.left) / r.width, T); };
 sc.addEventListener('pointerdown', pluckAt);
 sc.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') pluckAt(e); });
+
+// awards ledger: press, open, roll the placing
+const ease4 = (k) => 1 - Math.pow(1 - k, 4);
+function roll(n) {
+  const to = +n.dataset.rank; if (!to || reduce) return;
+  const t0 = performance.now(), from = Math.max(0, to - 9 - (Math.random() * 6 | 0));
+  const f = (now) => { const k = clamp((now - t0) / 750, 0, 1); n.textContent = String(Math.round(lerp(from, to, ease4(k)))).padStart(2, '0'); if (k < 1) requestAnimationFrame(f); };
+  requestAnimationFrame(f);
+}
+document.querySelectorAll('.aw').forEach(a => {
+  const btn = a.querySelector('.aw__row'), n = a.querySelector('.aw__n[data-rank]'), cv = a.querySelector('canvas');
+  btn.addEventListener('pointerdown', (e) => {
+    const r = btn.getBoundingClientRect(); btn.style.setProperty('--px', (e.clientX - r.left) + 'px');
+    btn.classList.add('is-press'); requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.remove('is-press')));
+  });
+  btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && n) roll(n); });
+  btn.addEventListener('click', () => {
+    const open = !a.classList.contains('is-open');
+    a.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open);
+    if (open) { cv.dataset.t0 = T; if (n) roll(n); Audio.note(+a.dataset.pitch); }
+    try { navigator.vibrate && navigator.vibrate(open ? 8 : 4); } catch (err) {}
+  });
+});
 
 // copy
 const copyBtn = document.getElementById('copy');
